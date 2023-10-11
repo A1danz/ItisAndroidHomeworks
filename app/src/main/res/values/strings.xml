@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="type_your_text">Введите текст</string>
+    <string name="go_to_3_fragment">Go to 3 fragment</string>
+    <string name="third_screen">Third screen</string>
+    <string name="second_screen">Second screen</string>
+    <string name="go_to_1_screen">Go to 1 screen</string>
+    <string name="go_to_2_screen">Go to 2 screen</string>
+    <string name="go_to_3_screen">Go to 3 screen</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="click_save_to_view_text">Нажмите сохранить, чтобы увидеть текст</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
