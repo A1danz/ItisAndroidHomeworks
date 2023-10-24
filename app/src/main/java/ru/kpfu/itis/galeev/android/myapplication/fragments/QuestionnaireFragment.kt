@@ -15,6 +15,7 @@ import ru.kpfu.itis.galeev.android.myapplication.model.AnswerData
 import ru.kpfu.itis.galeev.android.myapplication.model.QuestionData
 import ru.kpfu.itis.galeev.android.myapplication.utils.AnswersGenerator
 import ru.kpfu.itis.galeev.android.myapplication.utils.ArgumentsNames
+import ru.kpfu.itis.galeev.android.myapplication.utils.EnableCircularPager
 import ru.kpfu.itis.galeev.android.myapplication.utils.RecyclerViewViewPagerAdapter
 
 class QuestionnaireFragment : BaseFragment(R.layout.fragment_questionnaire) {
@@ -53,11 +54,19 @@ class QuestionnaireFragment : BaseFragment(R.layout.fragment_questionnaire) {
         with(viewBinding) {
             vpAdapter = QuestionsAdapter(this@QuestionnaireFragment, questions.toMutableList())
             vp2Questions.adapter = vpAdapter
+            vp2Questions.setCurrentItem(1, false)
+            EnableCircularPager.enableCircularPager(vp2Questions)
 
             vp2Questions.registerOnPageChangeCallback(object : OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
-                    RecyclerViewViewPagerAdapter.viewPagerPosition = position
+                    if (position == 0) {
+                        RecyclerViewViewPagerAdapter.viewPagerPosition = vpAdapter!!.itemCount - 2
+                    } else if (position == vpAdapter!!.itemCount - 1) {
+                        RecyclerViewViewPagerAdapter.viewPagerPosition = 0
+                    } else {
+                        RecyclerViewViewPagerAdapter.viewPagerPosition = position - 1
+                    }
                 }
             })
         }

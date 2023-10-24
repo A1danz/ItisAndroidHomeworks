@@ -11,32 +11,40 @@ import ru.kpfu.itis.galeev.android.myapplication.utils.RecyclerViewViewPagerAdap
 
 class QuestionsAdapter(fragment : Fragment, private val questionsList : MutableList<QuestionData>) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
-        return questionsList.size
+        return questionsList.size + 2
     }
 
     override fun createFragment(position: Int): Fragment {
+        var realPosition : Int = position
+        if (position == 0) {
+            realPosition = questionsList.size - 1
+        } else if (position == itemCount - 1) {
+            realPosition = 0
+        } else {
+            realPosition -= 1
+        }
+
         with(RecyclerViewViewPagerAdapter) {
-            if (position == questionsList.size - 1) {
+            if (realPosition == questionsList.size - 1) {
                 return QuestionFragment.getInstance(
-                    position + 1,
-                    questionsList[position].answers,
-                    chosenAnswerInViewPagerFragments[position],
+                    realPosition + 1,
+                    questionsList[realPosition].answers,
+                    chosenAnswerInViewPagerFragments[realPosition],
                     true
                 )
             } else {
-                if (chosenAnswerInViewPagerFragments[position] != -1) {
+                if (chosenAnswerInViewPagerFragments[realPosition] != -1) {
                    return QuestionFragment.getInstance(
-                        position + 1,
-                        questionsList[position].answers,
-                        chosenAnswerInViewPagerFragments[position]
+                        realPosition + 1,
+                        questionsList[realPosition].answers,
+                        chosenAnswerInViewPagerFragments[realPosition]
                     )
                 }
             }
         }
-
         return QuestionFragment.getInstance(
-            position + 1,
-            questionsList[position].answers
+            realPosition + 1,
+            questionsList[realPosition].answers
         )
     }
 }
