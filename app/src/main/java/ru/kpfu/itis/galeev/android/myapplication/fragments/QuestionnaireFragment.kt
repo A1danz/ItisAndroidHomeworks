@@ -12,6 +12,7 @@ import ru.kpfu.itis.galeev.android.myapplication.adapter.QuestionsAdapter
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseFragment
 import ru.kpfu.itis.galeev.android.myapplication.databinding.FragmentQuestionnaireBinding
 import ru.kpfu.itis.galeev.android.myapplication.model.AnswerData
+import ru.kpfu.itis.galeev.android.myapplication.model.QuestionData
 import ru.kpfu.itis.galeev.android.myapplication.utils.AnswersGenerator
 import ru.kpfu.itis.galeev.android.myapplication.utils.ArgumentsNames
 import ru.kpfu.itis.galeev.android.myapplication.utils.RecyclerViewViewPagerAdapter
@@ -42,13 +43,10 @@ class QuestionnaireFragment : BaseFragment(R.layout.fragment_questionnaire) {
         }
         RecyclerViewViewPagerAdapter.chosenAnswerInViewPagerFragments = chosenAnswersInViewPagerFragments
 
-        val questions : MutableList<QuestionFragment> = mutableListOf()
+        val questions : MutableList<QuestionData> = mutableListOf()
         for (index in 0 until questionCount) {
             val generatedAnswers = AnswersGenerator.generateAnswers(requireContext())
-            questions.add(QuestionFragment.getInstance(
-                index + 1,
-                generatedAnswers)
-            )
+            questions.add(QuestionData(generatedAnswers))
             RecyclerViewViewPagerAdapter.fragmentsAnswers.add(generatedAnswers)
         }
 

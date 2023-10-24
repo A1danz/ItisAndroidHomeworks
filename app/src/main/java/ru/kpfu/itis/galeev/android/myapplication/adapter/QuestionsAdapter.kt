@@ -5,37 +5,38 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.adapter.FragmentViewHolder
 import androidx.viewpager2.widget.ViewPager2
 import ru.kpfu.itis.galeev.android.myapplication.fragments.QuestionFragment
+import ru.kpfu.itis.galeev.android.myapplication.model.QuestionData
 import ru.kpfu.itis.galeev.android.myapplication.utils.AllAnswersAreCompletedChecker
 import ru.kpfu.itis.galeev.android.myapplication.utils.RecyclerViewViewPagerAdapter
 
-class QuestionsAdapter(fragment : Fragment, private val list : MutableList<QuestionFragment>) : FragmentStateAdapter(fragment) {
+class QuestionsAdapter(fragment : Fragment, private val questionsList : MutableList<QuestionData>) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
-        return list.size
+        return questionsList.size
     }
 
     override fun createFragment(position: Int): Fragment {
         with(RecyclerViewViewPagerAdapter) {
-            if (position == list.size - 1) {
-                val allCompleted = AllAnswersAreCompletedChecker.check(
-                    chosenAnswerInViewPagerFragments)
-
-                list[position] = QuestionFragment.getInstance(
+            if (position == questionsList.size - 1) {
+                return QuestionFragment.getInstance(
                     position + 1,
-                    fragmentsAnswers[position],
+                    questionsList[position].answers,
                     chosenAnswerInViewPagerFragments[position],
                     true
                 )
             } else {
                 if (chosenAnswerInViewPagerFragments[position] != -1) {
-                    list[position] = QuestionFragment.getInstance(
+                   return QuestionFragment.getInstance(
                         position + 1,
-                        fragmentsAnswers[position],
+                        questionsList[position].answers,
                         chosenAnswerInViewPagerFragments[position]
                     )
                 }
             }
         }
-        return list[position]
-    }
 
+        return QuestionFragment.getInstance(
+            position + 1,
+            questionsList[position].answers
+        )
+    }
 }
