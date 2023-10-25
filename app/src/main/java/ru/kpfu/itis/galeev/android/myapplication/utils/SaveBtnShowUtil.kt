@@ -4,4 +4,9 @@ package ru.kpfu.itis.galeev.android.myapplication.utils
 object SaveBtnShowUtil {
     var lastIsComplete : Boolean = false
     var allAreCompleted : Boolean = false
+
+    fun clearVariables() {
+        lastIsComplete = false
+        allAreCompleted = false
+    }
 }

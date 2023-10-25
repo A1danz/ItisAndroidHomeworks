@@ -98,9 +98,12 @@ class QuestionFragment : BaseFragment(R.layout.fragment_question) {
 
 
     fun moveToStartScreen() {
+        requireActivity().supportFragmentManager.popBackStack()
         (requireActivity() as? BaseActivity)?.moveToScreen(
             actionType = ActionType.REPLACE,
             destination = StartFragment.newInstance(),
+            "",
+            false
         )
     }
 

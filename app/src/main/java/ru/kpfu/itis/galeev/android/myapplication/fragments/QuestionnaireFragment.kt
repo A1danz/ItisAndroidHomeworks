@@ -80,6 +80,8 @@ class QuestionnaireFragment : BaseFragment(R.layout.fragment_questionnaire) {
         super.onDestroy()
         _viewBinding = null
         vpAdapter = null
+        RecyclerViewViewPagerAdapter.clearVariables()
+        SaveBtnShowUtil.clearVariables()
     }
 
     companion object {

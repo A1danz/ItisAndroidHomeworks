@@ -5,4 +5,9 @@ package ru.kpfu.itis.galeev.android.myapplication.utils
 object RecyclerViewViewPagerAdapter {
     var viewPagerPosition = 0
     var chosenAnswerInViewPagerFragments : MutableList<Int> = mutableListOf()
+
+    fun clearVariables() {
+        viewPagerPosition = 0
+        chosenAnswerInViewPagerFragments = mutableListOf()
+    }
 }

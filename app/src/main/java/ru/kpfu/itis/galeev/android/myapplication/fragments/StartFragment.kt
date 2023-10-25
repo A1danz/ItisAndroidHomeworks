@@ -133,7 +133,8 @@ class StartFragment : BaseFragment(R.layout.fragment_start) {
                 }
                 (requireActivity() as? BaseActivity)?.moveToScreen(
                     ActionType.REPLACE,
-                    QuestionnaireFragment.newInstance(textEditQuestionsCount.text.toString().toInt())
+                    QuestionnaireFragment.newInstance(textEditQuestionsCount.text.toString().toInt()),
+                    START_FRAGMENT_TAG
                 )
             }
         }
@@ -144,6 +145,7 @@ class StartFragment : BaseFragment(R.layout.fragment_start) {
         _viewBinding = null
     }
     companion object {
+        val START_FRAGMENT_TAG = "START_FRAGMENT_TAG"
         fun newInstance() = StartFragment()
     }
 }
