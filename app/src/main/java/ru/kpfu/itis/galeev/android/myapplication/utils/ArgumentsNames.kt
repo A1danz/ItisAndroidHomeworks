@@ -5,6 +5,5 @@ object ArgumentsNames {
     val questionNumber = "questionNumber"
     val answers = "answers"
     val chosenAnswer = "chosenAnswer"
-    val allCompleted = "allCompleted"
     val isLastFragmentInVp = "isLastFragmentInVp"
 }

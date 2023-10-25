@@ -49,7 +49,6 @@ class StartFragment : BaseFragment(R.layout.fragment_start) {
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    // prohibiting the user from erasing characters to the beginning of a textEdit
                     if (textEditPhone.text!!.length < 5) {
                         textEditPhone.setText("+7 (9")
                         textEditPhone.setSelection(5)

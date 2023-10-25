@@ -17,6 +17,7 @@ import ru.kpfu.itis.galeev.android.myapplication.utils.AllAnswersAreCompletedChe
 import ru.kpfu.itis.galeev.android.myapplication.utils.AnswersGenerator
 import ru.kpfu.itis.galeev.android.myapplication.utils.ArgumentsNames
 import ru.kpfu.itis.galeev.android.myapplication.utils.RecyclerViewViewPagerAdapter
+import ru.kpfu.itis.galeev.android.myapplication.utils.SaveBtnShowUtil
 import kotlin.properties.Delegates
 
 class QuestionFragment : BaseFragment(R.layout.fragment_question) {
@@ -30,11 +31,23 @@ class QuestionFragment : BaseFragment(R.layout.fragment_question) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (viewBinding.btnEndSurvey.visibility == View.INVISIBLE) {
+            setEndBtnVisibility()
+        }
         initViews()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (viewBinding.btnEndSurvey.visibility == View.INVISIBLE) {
+            setEndBtnVisibility()
+        }
     }
 
     fun initViews() {
         with(viewBinding) {
+            initEndBtn()
+
             val questionNumber = requireArguments().getInt(ArgumentsNames.questionNumber)
             tvQuestionNumber.text = "Вопрос $questionNumber"
             val answers  = arguments?.getStringArrayList(ArgumentsNames.answers)!!
@@ -44,10 +57,6 @@ class QuestionFragment : BaseFragment(R.layout.fragment_question) {
                 chosenAnswer = arguments?.getInt(ArgumentsNames.chosenAnswer)!!
             } else {
                 chosenAnswer = -1
-            }
-
-            if (arguments?.containsKey(ArgumentsNames.isLastFragmentInVp)!!) {
-                initEndBtn()
             }
 
             val answerDataList = mutableListOf<AnswerData>()
@@ -61,18 +70,29 @@ class QuestionFragment : BaseFragment(R.layout.fragment_question) {
     }
 
     fun initEndBtn() {
-        with(viewBinding) {
-            btnEndSurvey.visibility = View.VISIBLE
-
+        with (viewBinding) {
             btnEndSurvey.setOnClickListener {
-                val allCompleted = AllAnswersAreCompletedChecker.check(RecyclerViewViewPagerAdapter.chosenAnswerInViewPagerFragments)
+                val allCompleted =SaveBtnShowUtil.allAreCompleted ||
+                    AllAnswersAreCompletedChecker.check(RecyclerViewViewPagerAdapter.chosenAnswerInViewPagerFragments)
                 if (allCompleted) {
-                    Toast.makeText(requireContext(), "Вы успешно прошли опрос!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Вы успешно прошли опрос!", Toast.LENGTH_SHORT)
+                        .show()
                     moveToStartScreen()
                     return@setOnClickListener
                 }
-                Toast.makeText(requireContext(), "Пожалуйста, ответьте на все вопросы", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Пожалуйста, ответьте на все вопросы",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
+        }
+    }
+
+    fun setEndBtnVisibility() {
+        with(viewBinding) {
+            val showBtn = SaveBtnShowUtil.allAreCompleted || requireArguments().containsKey(ArgumentsNames.isLastFragmentInVp)
+            btnEndSurvey.visibility = if (showBtn) View.VISIBLE else View.INVISIBLE
         }
     }
 
@@ -90,7 +110,6 @@ class QuestionFragment : BaseFragment(R.layout.fragment_question) {
         rvAdapter = null
     }
 
-
     companion object {
         fun getInstance() = QuestionFragment()
         fun getInstance(questionNumber : Int, answers : List<String>) : QuestionFragment {
@@ -104,11 +123,8 @@ class QuestionFragment : BaseFragment(R.layout.fragment_question) {
             frag.apply {
                 arguments = bundle
             }
-
-            println("DEBUG TAG Deafult Instance")
             return frag
         }
-
         fun getInstance(questionNumber : Int, answers : List<String>, chosenItem: Int) : QuestionFragment {
             val frag : QuestionFragment = getInstance()
 
@@ -121,8 +137,6 @@ class QuestionFragment : BaseFragment(R.layout.fragment_question) {
             frag.apply {
                 arguments = bundle
             }
-
-            println("DEBUG TAG NoDeafult Instance")
             return frag
         }
 
@@ -138,10 +152,7 @@ class QuestionFragment : BaseFragment(R.layout.fragment_question) {
             frag.apply {
                 arguments = bundle
             }
-
-            println("DEBUG TAG NoDeafult Instance")
             return frag
         }
     }
-
 }

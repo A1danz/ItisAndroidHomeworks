@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.viewpager2.widget.ViewPager2
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import ru.kpfu.itis.galeev.android.myapplication.R
 import ru.kpfu.itis.galeev.android.myapplication.adapter.AnswersAdapter
@@ -17,6 +18,7 @@ import ru.kpfu.itis.galeev.android.myapplication.utils.AnswersGenerator
 import ru.kpfu.itis.galeev.android.myapplication.utils.ArgumentsNames
 import ru.kpfu.itis.galeev.android.myapplication.utils.EnableCircularPager
 import ru.kpfu.itis.galeev.android.myapplication.utils.RecyclerViewViewPagerAdapter
+import ru.kpfu.itis.galeev.android.myapplication.utils.SaveBtnShowUtil
 
 class QuestionnaireFragment : BaseFragment(R.layout.fragment_questionnaire) {
     var _viewBinding : FragmentQuestionnaireBinding? = null
@@ -37,7 +39,6 @@ class QuestionnaireFragment : BaseFragment(R.layout.fragment_questionnaire) {
     private fun initViewPager() {
         val questionCount : Int = requireArguments().getInt(ArgumentsNames.questionCount)
 
-        // {ViewPagerPosition : ChosenAnswer}
         val chosenAnswersInViewPagerFragments : MutableList<Int> = mutableListOf()
         for (index in 0 until questionCount) {
             chosenAnswersInViewPagerFragments.add(-1)
@@ -48,15 +49,18 @@ class QuestionnaireFragment : BaseFragment(R.layout.fragment_questionnaire) {
         for (index in 0 until questionCount) {
             val generatedAnswers = AnswersGenerator.generateAnswers(requireContext())
             questions.add(QuestionData(generatedAnswers))
-            RecyclerViewViewPagerAdapter.fragmentsAnswers.add(generatedAnswers)
         }
 
         with(viewBinding) {
             vpAdapter = QuestionsAdapter(this@QuestionnaireFragment, questions.toMutableList())
             vp2Questions.adapter = vpAdapter
+
+            // initialize CurcularViewPager
             vp2Questions.setCurrentItem(1, false)
             EnableCircularPager.enableCircularPager(vp2Questions)
 
+
+            // update ViewPagerPosition
             vp2Questions.registerOnPageChangeCallback(object : OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)

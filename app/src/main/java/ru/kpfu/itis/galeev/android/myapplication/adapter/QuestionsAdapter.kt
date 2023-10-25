@@ -8,6 +8,7 @@ import ru.kpfu.itis.galeev.android.myapplication.fragments.QuestionFragment
 import ru.kpfu.itis.galeev.android.myapplication.model.QuestionData
 import ru.kpfu.itis.galeev.android.myapplication.utils.AllAnswersAreCompletedChecker
 import ru.kpfu.itis.galeev.android.myapplication.utils.RecyclerViewViewPagerAdapter
+import ru.kpfu.itis.galeev.android.myapplication.utils.SaveBtnShowUtil
 
 class QuestionsAdapter(fragment : Fragment, private val questionsList : MutableList<QuestionData>) : FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
@@ -15,6 +16,7 @@ class QuestionsAdapter(fragment : Fragment, private val questionsList : MutableL
     }
 
     override fun createFragment(position: Int): Fragment {
+//      calc realPosition for circularViewPager
         var realPosition : Int = position
         if (position == 0) {
             realPosition = questionsList.size - 1
@@ -25,7 +27,14 @@ class QuestionsAdapter(fragment : Fragment, private val questionsList : MutableL
         }
 
         with(RecyclerViewViewPagerAdapter) {
+            if (SaveBtnShowUtil.lastIsComplete) {
+                SaveBtnShowUtil.allAreCompleted = SaveBtnShowUtil.allAreCompleted ||
+                        AllAnswersAreCompletedChecker.check(chosenAnswerInViewPagerFragments)
+            }
+
+            // show last fragment with 100% visibility endBtn
             if (realPosition == questionsList.size - 1) {
+                SaveBtnShowUtil.lastIsComplete = true
                 return QuestionFragment.getInstance(
                     realPosition + 1,
                     questionsList[realPosition].answers,
@@ -33,11 +42,12 @@ class QuestionsAdapter(fragment : Fragment, private val questionsList : MutableL
                     true
                 )
             } else {
+                // very very simple optimization
                 if (chosenAnswerInViewPagerFragments[realPosition] != -1) {
                    return QuestionFragment.getInstance(
-                        realPosition + 1,
-                        questionsList[realPosition].answers,
-                        chosenAnswerInViewPagerFragments[realPosition]
+                       realPosition + 1,
+                       questionsList[realPosition].answers,
+                       chosenAnswerInViewPagerFragments[realPosition],
                     )
                 }
             }
@@ -47,4 +57,5 @@ class QuestionsAdapter(fragment : Fragment, private val questionsList : MutableL
             questionsList[realPosition].answers
         )
     }
+
 }

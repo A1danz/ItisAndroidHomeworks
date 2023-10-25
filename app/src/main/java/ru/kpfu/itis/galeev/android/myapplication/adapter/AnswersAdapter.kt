@@ -9,7 +9,7 @@ import ru.kpfu.itis.galeev.android.myapplication.model.AnswerData
 import ru.kpfu.itis.galeev.android.myapplication.utils.RecyclerViewViewPagerAdapter
 
 class AnswersAdapter(
-    val answers : List<AnswerData>
+    answers : List<AnswerData>,
 ) : RecyclerView.Adapter<AnswersAdapter.AnswerViewHolder>() {
 
     val items : List<AnswerData> = answers
@@ -31,7 +31,6 @@ class AnswersAdapter(
 
     inner class AnswerViewHolder(private val viewBinding : QuestionItemBinding)
         : RecyclerView.ViewHolder(viewBinding.root) {
-
             fun bindItem(data : AnswerData) {
                 with(viewBinding) {
                     answerOption.text = data.answer
@@ -44,7 +43,6 @@ class AnswersAdapter(
                 answerOption.setOnClickListener {
                     with(RecyclerViewViewPagerAdapter) {
                         chosenAnswerInViewPagerFragments[viewPagerPosition] = adapterPosition
-                        println(" DEBUG TAG 23.10 ${chosenAnswerInViewPagerFragments} adapter $viewPagerPosition")
                     }
 
                     items[adapterPosition].isChosen = true
