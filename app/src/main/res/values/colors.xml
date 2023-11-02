@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="orange">#FF8400</color>
+    <color name="orange_second">#FF8E14</color>
+    <color name="orange_stroke">#FFA230</color>
+    <color name="orange_thin">#80FFF6EB</color>
+    <color name="gray">#979797</color>
+    <color name="header">#de7262</color>
+    <color name="upper_header">#dc742b</color>
+    <color name="first_grad">#bdc3c7</color>
+    <color name="second_grad">#1B232B</color>
 </resources>

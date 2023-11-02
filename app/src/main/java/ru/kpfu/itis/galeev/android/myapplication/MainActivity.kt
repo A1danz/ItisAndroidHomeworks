@@ -1,17 +1,16 @@
 package ru.kpfu.itis.galeev.android.myapplication
 
 import android.content.res.Configuration
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseFragment
 import ru.kpfu.itis.galeev.android.myapplication.databinding.ActivityMainBinding
-import ru.kpfu.itis.galeev.android.myapplication.fragments.FirstFragment
+import ru.kpfu.itis.galeev.android.myapplication.fragments.StartFragment
 import ru.kpfu.itis.galeev.android.myapplication.utils.ActionType
 
 class MainActivity : BaseActivity() {
     override val fragmentContainerId = R.id.main_activity_container
-    override val landscapeFragmentContainerId = R.id.main_activity_container_second
 
     var _viewBinding : ActivityMainBinding? = null
     val viewBinding : ActivityMainBinding
@@ -23,29 +22,23 @@ class MainActivity : BaseActivity() {
         _viewBinding = ActivityMainBinding.inflate(layoutInflater)
         val view = viewBinding.root
         setContentView(view)
-        supportFragmentManager.beginTransaction()
-            .replace(
-                fragmentContainerId,
-                FirstFragment.getInstance(resources.configuration.orientation),
-                FirstFragment.FIRST_FRAGMENT_TAG
-            )
-            .commit()
+
+        moveToScreen(
+            ActionType.REPLACE,
+            StartFragment(),
+            StartFragment.START_FRAGMENT_TAG,
+            false
+        )
     }
 
 
     override fun moveToScreen(
         actionType: ActionType,
-        destination: BaseFragment,
-        orientation : Int,
+        destination: Fragment,
         tag: String?,
         isAddToBackStack: Boolean
     ) {
-        val container : Int
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            container = landscapeFragmentContainerId
-        } else {
-            container = fragmentContainerId
-        }
+        val container : Int = fragmentContainerId;
         supportFragmentManager.beginTransaction().apply {
             when (actionType) {
                 ActionType.ADD -> {

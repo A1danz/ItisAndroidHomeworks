@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/add_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_add_cars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/add_news"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editText_cars"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:backgroundTint="@color/orange"
+            android:shadowColor="@color/black"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:inputType="number"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_add_cars"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/add_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        android:background="@drawable/btn_corner_big_radius"
+        android:layout_marginHorizontal="60dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/btn_add_news"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
