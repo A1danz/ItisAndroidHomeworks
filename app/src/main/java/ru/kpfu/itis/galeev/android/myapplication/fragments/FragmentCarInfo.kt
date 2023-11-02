@@ -49,7 +49,7 @@ class FragmentCarInfo(
                 SimpleLocalStorage.car!!.isFavorite = !SimpleLocalStorage.car!!.isFavorite
                 requireActivity().supportFragmentManager.findFragmentByTag(CarsFragment.CARS_FRAGMENT_TAG).apply {
                     (this as? CarsFragment)?.apply {
-                        itemChanged(adapterPosition!! - 1)
+                        itemChanged(adapterPosition!! - 1 - adapterPosition / 8)
                     }
                 }
                 ivFavoriteIc.setImageResource(

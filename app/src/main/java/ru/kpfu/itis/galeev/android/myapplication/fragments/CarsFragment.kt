@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import ru.kpfu.itis.galeev.android.myapplication.R
 import ru.kpfu.itis.galeev.android.myapplication.adapter.RVCarsAdapter
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
@@ -25,6 +27,7 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
     private val viewBinding get() = _viewBinding!!
     private var rvCarsAdapter : RVCarsAdapter? = null
     private var cars : MutableList<Car>? = null
+    private var layoutManager : LayoutManager? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _viewBinding = FragmentCarsBinding.inflate(inflater)
@@ -44,6 +47,7 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
             if (cars == null) {
                 cars = CarsGenerator.generateCars(carsCount)
             }
+            initLayoutManager()
 
             rvCarsAdapter = RVCarsAdapter(
                 context = requireContext(),
@@ -52,18 +56,9 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
                 onBtnClicked = ::onBtnClicked
             )
 
+
             rvCarsAdapter!!.setItems(cars!!)
             rvCars.adapter = rvCarsAdapter
-            if (cars!!.size > 12) {
-                val gridLayoutManager : GridLayoutManager = GridLayoutManager(requireContext(), 2)
-                gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                    override fun getSpanSize(position: Int): Int {
-                        if (position == 0) return 2
-                        else return 1
-                    }
-                }
-                rvCars.layoutManager = gridLayoutManager
-            }
         }
     }
 
@@ -73,14 +68,42 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
     }
 
     fun addCars(carsCount : Int) {
-        val prevCarsCount : Int = cars!!.size
-        for (step in 0 until carsCount) {
-            val randomValue = Random.nextInt(0, cars!!.size)
-            println("DEBUG TAG - $randomValue ${prevCarsCount}")
-            cars!!.add(randomValue, CarsGenerator.generateCar())
+        cars?.apply {
+            val prevCarsCount : Int = size
+            for (step in 0 until carsCount) {
+                val randomValue = Random.nextInt(0, size)
+                println("DEBUG TAG - $randomValue ${prevCarsCount}")
+                add(randomValue, CarsGenerator.generateCar())
+            }
+            sortBy { car -> car.price }
+            rvCarsAdapter?.setItems(this)
+            for (dividerPosition in 9 .. size) {
+                rvCarsAdapter?.notifyItemChanged(dividerPosition)
+            }
+
+            layoutManager = null
+            initLayoutManager()
         }
-        cars!!.sortBy { car -> car.price }
-        rvCarsAdapter?.setItems(cars!!)
+    }
+
+    fun initLayoutManager() {
+        if (layoutManager == null) {
+            if (cars!!.size > 12) {
+                val gridLayoutManager : GridLayoutManager = GridLayoutManager(requireContext(), 2)
+                gridLayoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int {
+                        if (position == 0 || position % 8 == (position / 8) % 8) return 2
+                        else return 1
+                    }
+                }
+                layoutManager = gridLayoutManager
+            } else {
+                val linearLayoutManager = LinearLayoutManager(requireContext())
+                layoutManager = linearLayoutManager
+            }
+            viewBinding.rvCars.layoutManager = layoutManager
+        }
+
     }
     private fun onItemStartClicked(position : Int) {
         rvCarsAdapter?.cars?.let {
@@ -90,7 +113,7 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
 
     private fun onItemClicked(position: Int) {
         SimpleLocalStorage.car = rvCarsAdapter?.cars?.let {
-            it[position - 1]
+            it[position - 1 - position / 8]
         }
 
         (requireActivity() as? BaseActivity)?.moveToScreen(
@@ -104,6 +127,10 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
         rvCarsAdapter?.notifyItemChanged(adapterPosition)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        layoutManager = null
+    }
     override fun onDestroy() {
         super.onDestroy()
         _viewBinding = null

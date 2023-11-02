@@ -67,21 +67,31 @@ class RVCarsAdapter(
     }
 
     override fun getItemCount(): Int {
-        return cars.size + 1
+        return cars.size + 1 + cars.size / 8
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (holder is CarSmallViewHolder ) {
-            holder.bindItem(cars[position - 1])
+            holder.bindItem(cars[position - 1 - position / 8])
         } else if (holder is CarBigViewHolder) {
-            holder.bindItem(cars[position - 1])
+            holder.bindItem(cars[position - 1 - position / 8])
+        } else if (holder is DividerConentHolder) {
+            if (position != this.itemCount - 1) {
+                holder.bindItem(cars[(position + 1) - 1 - position / 8].price)
+            }
         }
     }
 
     override fun getItemViewType(position: Int): Int {
         if (position == 0) { return HEADER_BTN_VIEW_TYPE }
-        else if(cars.size > 12) { return SMALL_CAR_VIEW_TYPE }
-        else return BIG_CAR_VIEW_TYPE
+        else {
+            if (position % 8 == (position / 8) % 8) return DIVIDER_VIEW_TYPE
+            if (cars.size > 12) {
+                return SMALL_CAR_VIEW_TYPE
+            } else {
+                return BIG_CAR_VIEW_TYPE
+            }
+        }
     }
 
     fun setItems(newList : List<Car>) {
@@ -109,7 +119,7 @@ class RVCarsAdapter(
         init {
             with(viewBinding) {
                 ivFavoriteIc.setOnClickListener {
-                    onItemStarClicked?.invoke(adapterPosition - 1)
+                    onItemStarClicked?.invoke(adapterPosition - 1 - adapterPosition / 8)
                     notifyItemChanged(adapterPosition)
                 }
 
@@ -136,7 +146,7 @@ class RVCarsAdapter(
         init {
             with(viewBinding) {
                 ivFavoriteIc.setOnClickListener {
-                    onItemStarClicked?.invoke(adapterPosition - 1)
+                    onItemStarClicked?.invoke(adapterPosition - 1 - adapterPosition / 8)
                     notifyItemChanged(adapterPosition)
                 }
 
@@ -164,7 +174,8 @@ class RVCarsAdapter(
         ViewHolder(viewBinding.root) {
         fun bindItem(price : Int) {
             with (viewBinding) {
-                tvPriceDivider.text = PriceConverter.convert(price)
+                tvPriceDivider.text = ">= ${PriceConverter.convert(price)}"
+                tvPriceDivider.visibility = View.VISIBLE
             }
         }
     }
