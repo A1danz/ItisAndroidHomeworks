@@ -8,13 +8,16 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
+import com.google.android.material.snackbar.Snackbar
 import ru.kpfu.itis.galeev.android.myapplication.R
 import ru.kpfu.itis.galeev.android.myapplication.adapter.RVCarsAdapter
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseFragment
 import ru.kpfu.itis.galeev.android.myapplication.databinding.FragmentCarsBinding
+import ru.kpfu.itis.galeev.android.myapplication.itemtouchhelper.SwipeToDelete
 import ru.kpfu.itis.galeev.android.myapplication.model.Car
 import ru.kpfu.itis.galeev.android.myapplication.utils.ActionType
 import ru.kpfu.itis.galeev.android.myapplication.utils.ArgumentNames
@@ -37,6 +40,7 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        initSwipeToDelete()
         println("DEBUG TAG - viewCreated")
     }
 
@@ -53,7 +57,8 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
                 context = requireContext(),
                 onItemStarClicked = ::onItemStartClicked,
                 onItemClicked = ::onItemClicked,
-                onBtnClicked = ::onBtnClicked
+                onBtnClicked = ::onBtnClicked,
+                onItemDeleted = ::onItemDeleted
             )
 
 
@@ -121,6 +126,31 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
             FragmentCarInfo.getInstance(position),
             FragmentCarInfo.FRAGMENT_CAR_INFO
         )
+    }
+
+    private fun onItemDeleted(position : Int) {
+        cars?.let {
+            val removedCar = it[position]
+            it.removeAt(position)
+            rvCarsAdapter?.setItems(it)
+
+            showRestoreItemSnackbar(position, removedCar)
+        }
+    }
+
+    private fun initSwipeToDelete() {
+        val swipeToDeleteCallback = SwipeToDelete(::onItemDeleted)
+        ItemTouchHelper(swipeToDeleteCallback).attachToRecyclerView(viewBinding.rvCars)
+    }
+
+    private fun showRestoreItemSnackbar(position: Int, car : Car) {
+        Snackbar.make(viewBinding.rvCars, "Item was deleted", Snackbar.LENGTH_LONG)
+            .setAction("Undo remove") {
+                cars?.let {
+                    it.add(position, car)
+                    rvCarsAdapter?.setItems(it)
+                }
+            }.show()
     }
 
     fun itemChanged(adapterPosition : Int) {

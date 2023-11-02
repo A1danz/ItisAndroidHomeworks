@@ -3,6 +3,7 @@ package ru.kpfu.itis.galeev.android.myapplication.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +21,8 @@ class RVCarsAdapter(
     private val context: Context,
     private val onItemStarClicked : ((Int) -> Unit)? = null,
     private val onItemClicked: ((Int) -> Unit)? = null,
-    private val onBtnClicked: (() -> Unit)? = null
+    private val onBtnClicked: (() -> Unit)? = null,
+    private val onItemDeleted: ((Int) -> Unit)? = null
     ) :
     RecyclerView.Adapter<ViewHolder>() {
 
@@ -151,8 +153,25 @@ class RVCarsAdapter(
                 }
 
                 cvCar.setOnClickListener {
-                    onItemClicked?.invoke(adapterPosition)
+                    if (overlayRect.visibility == View.GONE) {
+                        onItemClicked?.invoke(adapterPosition)
+                    } else {
+                        onItemDeleted?.invoke(adapterPosition)
+                    }
                 }
+
+                cvCar.setOnLongClickListener(object : OnLongClickListener {
+                    override fun onLongClick(v: View?): Boolean {
+                        if (overlayRect.visibility == View.GONE) {
+                            overlayRect.visibility = View.VISIBLE
+                            println("DEBUG TAG - VISIBLE")
+                        } else {
+                            overlayRect.visibility = View.GONE
+                            println("DEBUG TAG - INVISIBLE")
+                        }
+                        return true
+                    }
+                })
             }
         }
     }
