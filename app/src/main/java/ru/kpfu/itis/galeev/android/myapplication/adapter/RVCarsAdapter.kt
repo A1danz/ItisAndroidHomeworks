@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnLongClickListener
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -20,7 +21,7 @@ import ru.kpfu.itis.galeev.android.myapplication.utils.PriceConverter
 class RVCarsAdapter(
     private val context: Context,
     private val onItemStarClicked : ((Int) -> Unit)? = null,
-    private val onItemClicked: ((Int) -> Unit)? = null,
+    private val onItemClicked: ((Int, CardView) -> Unit)? = null,
     private val onBtnClicked: (() -> Unit)? = null,
     private val onItemDeleted: ((Int) -> Unit)? = null
     ) :
@@ -126,7 +127,7 @@ class RVCarsAdapter(
                 }
 
                 cvCar.setOnClickListener {
-                    onItemClicked?.invoke(adapterPosition)
+                    onItemClicked?.invoke(adapterPosition, cvCar)
                 }
             }
         }
@@ -154,7 +155,7 @@ class RVCarsAdapter(
 
                 cvCar.setOnClickListener {
                     if (overlayRect.visibility == View.GONE) {
-                        onItemClicked?.invoke(adapterPosition)
+                        onItemClicked?.invoke(adapterPosition, cvCar)
                     } else {
                         onItemDeleted?.invoke(adapterPosition)
                     }

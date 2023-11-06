@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -39,6 +40,7 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initViews()
         initSwipeToDelete()
         println("DEBUG TAG - viewCreated")
@@ -116,16 +118,12 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
         }
     }
 
-    private fun onItemClicked(position: Int) {
+    private fun onItemClicked(position: Int, cv : CardView) {
         SimpleLocalStorage.car = rvCarsAdapter?.cars?.let {
             it[position - 1 - position / 8]
         }
 
-        (requireActivity() as? BaseActivity)?.moveToScreen(
-            ActionType.REPLACE,
-            FragmentCarInfo.getInstance(position),
-            FragmentCarInfo.FRAGMENT_CAR_INFO
-        )
+        (requireActivity() as? BaseActivity)?.sharedTransition(cv, position)
     }
 
     private fun onItemDeleted(position : Int) {
@@ -154,7 +152,8 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
     }
 
     fun itemChanged(adapterPosition : Int) {
-        rvCarsAdapter?.notifyItemChanged(adapterPosition)
+        SimpleLocalStorage.car?.let { rvCarsAdapter?.cars?.set(adapterPosition, it) }
+        rvCarsAdapter?.notifyItemChanged(adapterPosition + 1)
     }
 
     override fun onDestroyView() {

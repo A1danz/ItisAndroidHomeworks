@@ -1,6 +1,7 @@
 package ru.kpfu.itis.galeev.android.myapplication.fragments
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,13 @@ class FragmentCarInfo(
     private val viewBinding get() = _viewBinding!!
     private var favoriteState : Boolean? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val inflater = TransitionInflater.from(requireContext())
+        enterTransition = inflater.inflateTransition(android.R.transition.fade)
+        returnTransition = inflater.inflateTransition(android.R.transition.fade)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _viewBinding = FragmentCarInfoBinding.inflate(inflater)
         return viewBinding.root
@@ -27,6 +35,7 @@ class FragmentCarInfo(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
         initViews()
     }
 
@@ -42,6 +51,7 @@ class FragmentCarInfo(
                     else R.drawable.ic_favorite_not
                 )
                 tvDescription.setText(description)
+                startPostponedEnterTransition()
             }
 
 

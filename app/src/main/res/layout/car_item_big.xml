@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
+        android:transitionName="small_image"
         app:rippleColor="@android:color/transparent"
         android:id="@+id/cv_car"
         android:layout_width="match_parent"

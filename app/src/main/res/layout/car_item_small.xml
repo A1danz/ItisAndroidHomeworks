@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="@id/cv_car" />
 
     <androidx.cardview.widget.CardView
+        android:transitionName="small_image"
         android:visibility="visible"
         app:rippleColor="@android:color/transparent"
         android:id="@+id/cv_car"
