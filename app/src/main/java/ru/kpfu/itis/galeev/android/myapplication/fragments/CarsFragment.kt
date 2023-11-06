@@ -152,8 +152,14 @@ class CarsFragment : BaseFragment(R.layout.fragment_cars) {
     }
 
     fun itemChanged(adapterPosition : Int) {
-        SimpleLocalStorage.car?.let { rvCarsAdapter?.cars?.set(adapterPosition, it) }
-        rvCarsAdapter?.notifyItemChanged(adapterPosition + 1)
+        cars?.let {
+            it[adapterPosition - 1 - it.size / 8].isFavorite = !it[adapterPosition - 1 - it.size / 8].isFavorite
+        }
+        rvCarsAdapter?.cars?.let {
+            it[adapterPosition - 1 - it.size / 8].isFavorite = !it[adapterPosition - 1 - it.size / 8].isFavorite
+        }
+
+        rvCarsAdapter?.notifyItemChanged(adapterPosition)
     }
 
     override fun onDestroyView() {
