@@ -1,3 +1,46 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="type_your_text">Введите текст</string>
+    <string name="go_to_3_fragment">Go to 3 fragment</string>
+    <string name="third_screen">Third screen</string>
+    <string name="second_screen">Second screen</string>
+    <string name="go_to_1_screen">Go to 1 screen</string>
+    <string name="go_to_2_screen">Go to 2 screen</string>
+    <string name="go_to_3_screen">Go to 3 screen</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="click_save_to_view_text">Нажмите сохранить, чтобы увидеть текст</string>
+    <string name="input_cars_count">Введите\nколичество машин:</string>
+    <string name="show_btn">Показать</string>
+    <string name="btn_add">Добавить</string>
+    <string name="add_news">Добавить машины:</string>
+    <string name="btn_add_news">Добавить</string>
+
+    <string name="gazel">ГАЗель 3221</string>
+    <string name="haval_jolion">Haval Jolion</string>
+    <string name="lada_granta_2">Lada Granta</string>
+    <string name="lada_granta_first">Lada Granta</string>
+    <string name="lada_niva">Lada Niva</string>
+    <string name="opel_astra_first">Opel Astra</string>
+    <string name="opel_astra_second">Opel Astra</string>
+    <string name="toyota_tank">Toyota Tank</string>
+    <string name="vesta">Lada Vesta</string>
+    <string name="lorem_ipsum_150">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
+        commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis
+        parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,
+        pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
+        nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+        Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
+        elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu,
+        consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,
+        tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
+        Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam
+        rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet
+        adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id,
+        lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis
+        faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed
+        fringilla mauris sit amet nibh. Donec sodales sagittis magna.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
