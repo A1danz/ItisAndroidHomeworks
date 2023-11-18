@@ -24,8 +24,8 @@ class FragmentCarInfo(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val inflater = TransitionInflater.from(requireContext())
-        enterTransition = inflater.inflateTransition(android.R.transition.fade)
-        returnTransition = inflater.inflateTransition(android.R.transition.fade)
+        enterTransition = inflater.inflateTransition(android.R.transition.slide_bottom)
+        returnTransition = inflater.inflateTransition(android.R.transition.slide_bottom)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

@@ -69,7 +69,7 @@ class MainActivity : BaseActivity() {
         supportFragmentManager.beginTransaction()
             .setReorderingAllowed(true)
             .addSharedElement(cv, "big_image")
-                .add(fragmentContainerId, FragmentCarInfo.getInstance(position))
+            .replace(fragmentContainerId, FragmentCarInfo.getInstance(position))
             .addToBackStack(null)
             .commit()
     }
