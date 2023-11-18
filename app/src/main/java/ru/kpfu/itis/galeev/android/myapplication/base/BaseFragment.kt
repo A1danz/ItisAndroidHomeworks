@@ -10,42 +10,42 @@ import androidx.fragment.app.Fragment
 abstract class BaseFragment(@LayoutRes layout : Int) : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        showMessageInConsole("OnCreateCalled")
+//        showMessageInConsole("OnCreateCalled")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        showMessageInConsole("OnCreateViewCalled")
+//        showMessageInConsole("OnCreateViewCalled")
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onStart() {
         super.onStart()
-        showMessageInConsole("OnStartCalled")
+//        showMessageInConsole("OnStartCalled")
     }
 
     override fun onResume() {
         super.onResume()
-        showMessageInConsole("OnResumeCalled")
+//        showMessageInConsole("OnResumeCalled")
     }
 
     override fun onPause() {
         super.onPause()
-        showMessageInConsole("OnPauseCalled")
+//        showMessageInConsole("OnPauseCalled")
     }
 
     override fun onStop() {
         super.onStop()
-        showMessageInConsole("OnStopCalled")
+//        showMessageInConsole("OnStopCalled")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        showMessageInConsole("OnDestroyViewCalled")
+//        showMessageInConsole("OnDestroyViewCalled")
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        showMessageInConsole("OnDestroyCalled")
+//        showMessageInConsole("OnDestroyCalled")
     }
 
     private fun showMessageInConsole(message: String) {
