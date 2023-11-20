@@ -4,13 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
+import ru.kpfu.itis.galeev.android.myapplication.MainActivity
+import ru.kpfu.itis.galeev.android.myapplication.R
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
 import ru.kpfu.itis.galeev.android.myapplication.databinding.FragmentNotificationsBinding
+import ru.kpfu.itis.galeev.android.myapplication.utils.NotificationHandler
+import ru.kpfu.itis.galeev.android.myapplication.utils.NotificationIdCounter
 
 class NotificationsFragment : Fragment() {
     var _viewBinding : FragmentNotificationsBinding? = null
     val viewBinding : FragmentNotificationsBinding get() = _viewBinding!!
+    val notificationHandler = NotificationHandler()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,8 +28,32 @@ class NotificationsFragment : Fragment() {
         return viewBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initViews()
+    }
+
+    fun initViews() {
+        with(viewBinding) {
+            btnCreateNotif.setOnClickListener {
+                (requireActivity() as? MainActivity)?.requestPermission()
+                notificationHandler.createNotification(
+                    requireContext(),
+                    NotificationIdCounter.mainNotificationId++,
+                    MAIN_NOTFICATION_CHANNEL_ID,
+                    etTitleInput.text.toString(),
+                    etTextInput.text.toString()
+                    )
+            }
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         _viewBinding = null
+    }
+
+    companion object {
+        val MAIN_NOTFICATION_CHANNEL_ID = "A1danz_app_channel"
     }
 }

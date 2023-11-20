@@ -10,4 +10,5 @@
     <string name="hint_text">Введите ваш текст</string>
     <string name="label_input_text">Текст уведомления</string>
     <string name="btn_text_create">Создать</string>
+    <string name="aidans_channel_name">Aidan app</string>
 </resources>

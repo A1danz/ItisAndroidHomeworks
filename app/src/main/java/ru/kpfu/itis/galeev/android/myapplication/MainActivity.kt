@@ -1,8 +1,19 @@
 package ru.kpfu.itis.galeev.android.myapplication
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.app.Notification
+import android.app.NotificationChannel
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.iterator
 import androidx.navigation.fragment.NavHostFragment
@@ -10,6 +21,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarView
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
 import ru.kpfu.itis.galeev.android.myapplication.databinding.ActivityMainBinding
+import ru.kpfu.itis.galeev.android.myapplication.utils.RequestPermissionHandler
 
 class MainActivity : BaseActivity() {
     override val fragmentContainerId = R.id.main_activity_container
@@ -19,6 +31,8 @@ class MainActivity : BaseActivity() {
         get() = _viewBinding!!
 
     var titles : HashMap<Int, String> = HashMap()
+
+    var requestPermissionHandler : RequestPermissionHandler? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,12 +54,16 @@ class MainActivity : BaseActivity() {
             changeTitleBar()
 
             bnvBottomNavigation.setupWithNavController(navController)
+            requestPermissionHandler = RequestPermissionHandler(this@MainActivity)
+            requestPermission()
+
+            println("TEST TAG - ${NotificationChannel.DEFAULT_CHANNEL_ID}")
         }
     }
 
-    override fun changeTitleBar() {
-        with(viewBinding) {
-            tvToolbarTitle.text = titles[bnvBottomNavigation.selectedItemId]
+    fun requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requestPermissionHandler?.requestPermission(android.Manifest.permission.POST_NOTIFICATIONS)
         }
     }
 
@@ -61,13 +79,21 @@ class MainActivity : BaseActivity() {
                 }
             }
         }
-
     }
 
+    override fun changeTitleBar() {
+        with(viewBinding) {
+            tvToolbarTitle.text = titles[bnvBottomNavigation.selectedItemId]
+        }
+    }
 
     override fun onDestroy() {
         _viewBinding = null
         println("onDestroyCalled")
         super.onDestroy()
+    }
+
+    companion object {
+        val CODE_NOTIFICATION_POST = 1024
     }
 }
