@@ -40,6 +40,7 @@ android {
 
 dependencies {
     val nav_version = "2.7.5"
+    val coroutine_version = "1.6.4"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -59,5 +60,10 @@ dependencies {
     androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
     // Jetpack Compose Integration
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    //Coroutine
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version")
+
 
 }

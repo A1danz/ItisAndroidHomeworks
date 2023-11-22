@@ -18,12 +18,19 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.core.view.iterator
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationBarView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.newCoroutineContext
+import kotlinx.coroutines.withContext
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
 import ru.kpfu.itis.galeev.android.myapplication.databinding.ActivityMainBinding
+import ru.kpfu.itis.galeev.android.myapplication.utils.CoroutinesConfig
 import ru.kpfu.itis.galeev.android.myapplication.utils.ParamsKey
 import ru.kpfu.itis.galeev.android.myapplication.utils.RequestPermissionHandler
 
@@ -94,6 +101,11 @@ class MainActivity : BaseActivity() {
         with(viewBinding) {
             tvToolbarTitle.text = titles[bnvBottomNavigation.selectedItemId]
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        println("TEST TAG - OnStopCalled")
     }
 
     override fun onDestroy() {
