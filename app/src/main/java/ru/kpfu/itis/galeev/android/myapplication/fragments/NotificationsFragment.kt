@@ -4,14 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.NotificationCompat
 import androidx.fragment.app.Fragment
 import ru.kpfu.itis.galeev.android.myapplication.MainActivity
-import ru.kpfu.itis.galeev.android.myapplication.R
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
 import ru.kpfu.itis.galeev.android.myapplication.databinding.FragmentNotificationsBinding
+import ru.kpfu.itis.galeev.android.myapplication.utils.NotificationConfig
 import ru.kpfu.itis.galeev.android.myapplication.utils.NotificationHandler
-import ru.kpfu.itis.galeev.android.myapplication.utils.NotificationIdCounter
 
 class NotificationsFragment : Fragment() {
     var _viewBinding : FragmentNotificationsBinding? = null
@@ -39,7 +37,7 @@ class NotificationsFragment : Fragment() {
                 (requireActivity() as? MainActivity)?.requestPermission()
                 notificationHandler.createNotification(
                     requireContext(),
-                    NotificationIdCounter.mainNotificationId++,
+                    NotificationConfig.notificationId++,
                     MAIN_NOTFICATION_CHANNEL_ID,
                     etTitleInput.text.toString(),
                     etTextInput.text.toString()

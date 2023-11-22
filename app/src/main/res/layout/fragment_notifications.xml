@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="50dp"
         android:text="@string/btn_text_create"
-        android:layout_marginVertical="10dp"
+        android:layout_marginVertical="20dp"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
