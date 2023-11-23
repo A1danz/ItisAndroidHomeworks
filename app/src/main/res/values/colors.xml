@@ -13,4 +13,7 @@
     <color name="dark_gray">#8b8c89</color>
     <color name="dark_black">#001233</color>
     <color name="blue_light">#cae9ff</color>
+    <color name="error_container">#F8DDDB</color>
+    <color name="error_outline">#410E0B</color>
+    <color name="error_primary">#B2261E</color>
 </resources>

@@ -108,6 +108,8 @@ class MainActivity : BaseActivity() {
         println("TEST TAG - OnStopCalled")
     }
 
+
+
     override fun onDestroy() {
         _viewBinding = null
         super.onDestroy()

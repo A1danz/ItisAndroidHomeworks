@@ -38,4 +38,11 @@
     <string name="coroutine_settings_stop_background_title">Stop on background</string>
     <string name="coroutines_count_title">Количество корутин:</string>
     <string name="coroutine_settings_stop_background_desc">Завершение всех корутин при сворачивании приложения</string>
+    <string name="notification_dialog_title">Разрешение на отправку уведомлений.</string>
+    <string name="notification_rationale_text">Пожалуйста, дайте разрешение на отправку уведмолений.</string>
+    <string name="notification_after_rationale_text">"Для дальнейшей корректной работы приложения необходимо дать разрешение на отправку - перейдите в настройки, откройте 'Разрешения' -> 'Уведомления'.</string>
+    <string name="btn_ok">Ок</string>
+    <string name="btn_cancel">Отмена</string>
+    <string name="btn_settings">Настройки</string>
+    <string name="airplane_mode_text">Ой-ой. Похоже - включен режим полета</string>
 </resources>
