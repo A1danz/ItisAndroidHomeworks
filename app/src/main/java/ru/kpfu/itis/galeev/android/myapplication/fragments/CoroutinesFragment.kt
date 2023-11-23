@@ -22,11 +22,12 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import ru.kpfu.itis.galeev.android.myapplication.R
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
 import ru.kpfu.itis.galeev.android.myapplication.databinding.FragmentCoroutinesBinding
 import ru.kpfu.itis.galeev.android.myapplication.utils.CoroutinesConfig
 
-class CoroutinesFragment : Fragment() {
+class CoroutinesFragment : AirplaneBtnsFragment(R.layout.fragment_coroutines) {
     var _viewBinding : FragmentCoroutinesBinding? = null
     val viewBinding : FragmentCoroutinesBinding get() = _viewBinding!!
     var job : Job? = null
@@ -119,9 +120,14 @@ class CoroutinesFragment : Fragment() {
         super.onStop()
     }
 
+    override fun changeBtnByModeState(state: Boolean) {
+        _viewBinding?.let {viewBinding ->
+            viewBinding.btnStartCoroutines.isEnabled = state
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
-        println("TEST TAG ${requireContext()}")
         job = null
         deferreds = null
     }

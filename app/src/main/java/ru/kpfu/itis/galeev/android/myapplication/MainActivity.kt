@@ -4,10 +4,14 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.app.Notification
 import android.app.NotificationChannel
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
@@ -17,6 +21,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
+import androidx.core.view.isVisible
 import androidx.core.view.iterator
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
@@ -29,7 +34,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.newCoroutineContext
 import kotlinx.coroutines.withContext
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
+import ru.kpfu.itis.galeev.android.myapplication.base.BaseFragment
 import ru.kpfu.itis.galeev.android.myapplication.databinding.ActivityMainBinding
+import ru.kpfu.itis.galeev.android.myapplication.fragments.AirplaneBtnsFragment
 import ru.kpfu.itis.galeev.android.myapplication.utils.CoroutinesConfig
 import ru.kpfu.itis.galeev.android.myapplication.utils.ParamsKey
 import ru.kpfu.itis.galeev.android.myapplication.utils.RequestPermissionHandler
@@ -42,6 +49,8 @@ class MainActivity : BaseActivity() {
         get() = _viewBinding!!
 
     var titles : HashMap<Int, String> = HashMap()
+
+    private val receiver by lazy { getAirplaneModeBroadcastReceiver() }
 
     var requestPermissionHandler : RequestPermissionHandler? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -103,11 +112,40 @@ class MainActivity : BaseActivity() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        println("TEST TAG - OnStopCalled")
+    override fun onResume() {
+        super.onResume()
+
+        changeActivityByAirplaneState(Settings.System.getInt(this.contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) == 1)
+        registerReceiver(receiver, IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED))
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        unregisterReceiver(receiver)
+    }
+
+    private fun getAirplaneModeBroadcastReceiver() : BroadcastReceiver {
+        return object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                if (intent?.action == Intent.ACTION_AIRPLANE_MODE_CHANGED) {
+                    changeActivityByAirplaneState(intent.getBooleanExtra("state", false))
+                }
+            }
+        }
+    }
+
+
+    fun changeActivityByAirplaneState(state : Boolean) {
+        with(viewBinding) {
+            cvAirplaneMode.isVisible = state
+            val navHostFragment = supportFragmentManager.fragments.first() as? NavHostFragment
+            navHostFragment?.let { fragment ->
+                (fragment.childFragmentManager.fragments.last() as? AirplaneBtnsFragment)
+                    ?.changeBtnByModeState(!state)
+            }
+        }
+    }
 
 
     override fun onDestroy() {

@@ -7,9 +7,6 @@ import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
 import kotlin.random.Random
 
 object CoroutinesConfig {
-    var stopOnBackground = false
-    var async = false
-
     suspend fun doWork(num : Int) {
         delay(Random.nextLong(2000))
         Log.e("TEST TAG", "Finished - $num")

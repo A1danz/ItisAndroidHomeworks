@@ -35,10 +35,12 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(viewBinding) {
-            val changeDefaultPrivacyMessage : String = ContextCompat.getString(requireContext(), R.string.change_default_privacy_alert)
             importanceSwitchGroup = mutableListOf(switchImportanceMedium, switchImportanceHigh, switchImportanceUrgent)
             privacySwitchGroup = mutableListOf(switchPrivacyPublic, switchPrivacyPrivate, switchPrivacySecret)
-            checkAllSwitches(this)
+
+            matchSwitchesWithConfig(this)
+            val changeDefaultPrivacyMessage : String = ContextCompat.getString(requireContext(), R.string.change_default_privacy_alert)
+
             val switchImportanceCheckedChangeListener = object : CompoundButton.OnCheckedChangeListener {
                 override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
                     val switch = buttonView as? SwitchCompat
@@ -89,7 +91,6 @@ class SettingsFragment : Fragment() {
                                 Toast.makeText(requireContext(), changeDefaultPrivacyMessage, Toast.LENGTH_SHORT).show()
                             }
                         }
-                        println("TEST TAG - ${NotificationConfig.privacyVisibility}")
                     }
                 }
             }
@@ -100,6 +101,7 @@ class SettingsFragment : Fragment() {
             privacySwitchGroup.map { switchCompat ->
                 switchCompat.setOnCheckedChangeListener(switchPrivacyCheckedChangeListener)
             }
+
             switchFeatureBtn.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener {
                 override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
                     NotificationConfig.withBtn = isChecked
@@ -114,7 +116,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
-    fun checkAllSwitches(viewBinding : FragmentSettingsBinding) {
+    fun matchSwitchesWithConfig(viewBinding : FragmentSettingsBinding) {
         with (viewBinding) {
             when (NotificationConfig.importance) {
                 NotificationManager.IMPORTANCE_MIN -> switchImportanceMedium.isChecked = true

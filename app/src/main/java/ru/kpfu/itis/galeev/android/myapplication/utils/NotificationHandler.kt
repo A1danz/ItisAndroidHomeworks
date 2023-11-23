@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat
 import ru.kpfu.itis.galeev.android.myapplication.MainActivity
 import ru.kpfu.itis.galeev.android.myapplication.R
 
-class NotificationHandler() {
+class NotificationHandler {
     private var mainChannelName : String = ""
     private var manager : NotificationManager? = null
     private var channels : HashMap<Int, NotificationChannel> = hashMapOf()
@@ -30,6 +30,7 @@ class NotificationHandler() {
         }
         if (channels.isEmpty()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                // creating channels
                 listOf(
                     NotificationManager.IMPORTANCE_MIN, NotificationManager.IMPORTANCE_LOW,
                     NotificationManager.IMPORTANCE_DEFAULT, NotificationManager.IMPORTANCE_HIGH
@@ -89,7 +90,7 @@ class NotificationHandler() {
                 .setContentTitle(title)
                 .setContentText(text)
                 .setVisibility(NotificationConfig.privacyVisibility)
-                .setPriority(NotificationConfig.getPriorityByImportance()) //ignore in above versions
+                .setPriority(NotificationConfig.getPriorityByImportance()) // ignored in versions above
                 .setContentIntent(actionTapIntent)
                 .setAutoCancel(true)
 
@@ -111,7 +112,6 @@ class NotificationHandler() {
                 )
             }
             manager.notify(id, notification.build())
-
         }
     }
 }
