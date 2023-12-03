@@ -14,20 +14,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:contentInsetStart="0dp"
+        android:contentInsetStart="0dp"
         >
+
         <TextView
             android:id="@+id/tv_toolbar_title"
-            android:layout_centerInParent="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text=""
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            android:layout_centerInParent="true"
+            android:fontFamily="serif-monospace"
             android:gravity="center"
-            android:fontFamily="@font/rubik"
-
-            />
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -35,87 +36,17 @@
         android:id="@+id/main_activity_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/bnv_bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
 
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:defaultNavHost="true"
         app:navGraph="@navigation/nav_graph"
         />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bnv_bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/main_activity_container"
-        app:layout_constraintBottom_toBottomOf="parent"
 
-        app:menu="@menu/menu"
-        />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_airplane_mode"
-        android:visibility="invisible"
-        app:cardElevation="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:cardBackgroundColor="@color/error_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:cardCornerRadius="10dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
-        >
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintStart_toStartOf="@id/iv_plane"
-                app:layout_constraintEnd_toEndOf="@id/iv_plane"
-                app:layout_constraintTop_toTopOf="@id/iv_plane"
-                app:layout_constraintBottom_toBottomOf="@id/iv_plane"
-                android:background="@drawable/sh_error_block"
-
-                />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_plane"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@drawable/ic_plane"
-                android:layout_marginStart="10dp"
-                android:paddingVertical="3dp"
-                android:paddingHorizontal="3dp"
-                />
-
-            <TextView
-                style="@style/setting_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/iv_plane"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textAlignment="textStart"
-                android:text="@string/airplane_mode_text"
-                android:textSize="16sp"
-                android:textColor="@color/error_primary"
-                android:layout_marginStart="5dp"
-                />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
