@@ -23,10 +23,8 @@ class MainActivity : BaseActivity() {
     val viewBinding : ActivityMainBinding
         get() = _viewBinding!!
 
-    var titles : HashMap<Int, String> = HashMap()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val intent : Intent = intent
 
         _viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
@@ -38,7 +36,6 @@ class MainActivity : BaseActivity() {
 
     override fun changeTitleBar() {
         with(viewBinding) {
-            tvToolbarTitle.text = titles[bnvBottomNavigation.selectedItemId]
         }
     }
 

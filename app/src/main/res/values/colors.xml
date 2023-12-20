@@ -10,10 +10,8 @@
     <color name="primary">#ff0000</color>
     <color name="secondary">#ef233c</color>
     <color name="gray">#BECAD1</color>
-    <color name="dark_gray">#8b8c89</color>
-    <color name="dark_black">#001233</color>
     <color name="primary_light">#ff4d6d</color>
-    <color name="error_container">#F8DDDB</color>
-    <color name="error_outline">#410E0B</color>
-    <color name="error_primary">#B2261E</color>
+    <color name="white_bg">#f5f3f4</color>
+    <color name="text_dark">#03071e</color>
+    <color name="text_gray">#b1a7a6</color>
 </resources>
