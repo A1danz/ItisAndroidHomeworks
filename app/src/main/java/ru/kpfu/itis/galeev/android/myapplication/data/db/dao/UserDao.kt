@@ -24,7 +24,7 @@ interface UserDao {
     fun getUserByPhoneOrEmail(phoneNumber : String, email : String) : List<Int>
 
     @Insert
-    fun saveUser(user : UserEntity)
+    fun saveUser(user : UserEntity) : Long
 
     @Query("UPDATE usr SET phone_number=:newPhoneNumber WHERE id=:userId")
     fun updatePhoneNumber(userId : Int, newPhoneNumber : String)

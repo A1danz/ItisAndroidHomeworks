@@ -10,7 +10,7 @@ object ServiceLocator {
     private var userId : Int? = null
 
     private fun createDatabase(ctx : Context) {
-        ctx.deleteDatabase("application.db")
+//        ctx.deleteDatabase("application.db")
         dbInstance = Room.databaseBuilder(ctx, ApplicationDatabase::class.java, "application.db")
             .build()
     }
@@ -28,6 +28,10 @@ object ServiceLocator {
 
     fun terminateUserAuth() {
         userId = null
+    }
+
+    fun getUserId() : Int {
+        return userId!!
     }
 
 }

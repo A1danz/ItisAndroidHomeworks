@@ -13,4 +13,12 @@
     <string name="phone_number">Номер телефона</string>
     <string name="name">Имя</string>
     <string name="have_already_account_question">Уже есть аккаунт?</string>
+    <string name="name_valid_error">Имя должно состоять из латинских букв, длина 3-20</string>
+    <string name="phone_valid_error">Телефон введен неправильно. Маска: +7 (982)-912-45-41</string>
+    <string name="email_valid_error">Email введен неправильно. Введите на основе: example@example.com</string>
+    <string name="user_already_exists_msg">Пользователь с таким именем или телефоном уже существует!</string>
+    <string name="session_arg_name">session</string>
+    <string name="music">Музыка</string>
+    <string name="add">Добавить</string>
+    <string name="profile">Профиль</string>
 </resources>

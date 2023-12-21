@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
 import ru.kpfu.itis.galeev.android.myapplication.databinding.ActivityMainBinding
+import ru.kpfu.itis.galeev.android.myapplication.utils.EncryptionUtil
 import ru.kpfu.itis.galeev.android.myapplication.utils.ParamsKey
 
 class MainActivity : BaseActivity() {

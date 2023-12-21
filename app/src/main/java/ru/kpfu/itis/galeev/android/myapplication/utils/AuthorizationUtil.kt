@@ -18,4 +18,29 @@ class AuthorizationUtil(
         }
         return UXMessages.FAILURE_AUTH
     }
+
+    fun registerUser(user : UserEntity) : Enum<UXMessages> {
+        user.passwordHash = EncryptionUtil.getPasswordHash(user.passwordHash)
+        val registeredUsers : List<Int> = userDao.getUserByPhoneOrEmail(user.phoneNumber, user.email)
+        if (registeredUsers.isNotEmpty()) {
+            return UXMessages.USER_ALREADY_EXISTS
+        } else {
+            val authId : Long = userDao.saveUser(user)
+            ServiceLocator.authorizeUser(authId.toInt())
+            return UXMessages.SUCCESS_REGISTER
+        }
+    }
+
+    fun checkSession() {
+
+    }
+
+    fun getSessionData(timestamp : Long, userId : Int) : String {
+        return EncryptionUtil.encodeData("$timestamp/$userId")
+    }
+
+    fun getIdBySessionData(sessionString : String) : String {
+        return EncryptionUtil.decodeData(sessionString).split("/")[1]
+    }
+
 }
