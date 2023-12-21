@@ -30,5 +30,8 @@ interface UserDao {
     fun updatePhoneNumber(userId : Int, newPhoneNumber : String)
 
     @Query("UPDATE usr SET password_hash=:newPasswordHash WHERE id=:userId")
-    fun updatePasswrod(userId : Int, newPasswordHash : String)
+    fun updatePassword(userId : Int, newPasswordHash : String)
+
+    @Query("SELECT * FROM usr WHERE email LIKE :email AND password_hash LIKE :passwordHash")
+    fun getUserByEmailAndPassword(email : String, passwordHash: String) : List<UserEntity>
 }

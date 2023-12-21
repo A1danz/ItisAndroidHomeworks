@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.kpfu.itis.galeev.android.myapplication.R
 import ru.kpfu.itis.galeev.android.myapplication.base.BaseFragment
+import ru.kpfu.itis.galeev.android.myapplication.data.db.dao.UserDao
+import ru.kpfu.itis.galeev.android.myapplication.data.db.entity.UserEntity
 import ru.kpfu.itis.galeev.android.myapplication.databinding.SignInFragmentBinding
 import ru.kpfu.itis.galeev.android.myapplication.db.service.UserService
 import ru.kpfu.itis.galeev.android.myapplication.di.ServiceLocator
@@ -32,10 +36,13 @@ class SignInFragment : BaseFragment(R.layout.sign_in_fragment) {
             btnSignIn.setOnClickListener {
                 val email : String = editTextEmail.text.toString()
                 val password : String = editTextPassword.text.toString()
-                val authResult = UserService.checkUserData(email, password)
+//                val authResult = UserService.checkUserData(email, password)
                 lifecycleScope.launch(Dispatchers.IO) {
-                    ServiceLocator.getDbInstance(ctx = requireContext())
                 }
+
+            }
+            btnMoveToRegister.setOnClickListener {
+                findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
             }
         }
     }

@@ -34,11 +34,6 @@ class MainActivity : BaseActivity() {
             }
         }
 
-    override fun changeTitleBar() {
-        with(viewBinding) {
-        }
-    }
-
     override fun onDestroy() {
         _viewBinding = null
         super.onDestroy()
