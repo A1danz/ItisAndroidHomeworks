@@ -71,7 +71,7 @@ class SignInFragment : AuthFragment(R.layout.sign_in_fragment) {
                                 }
                                 findNavController().navigate(R.id.action_signInFragment_to_authorizedStateFragment)
                             } else {
-                                alertBuilder.setMessage("Вы ввели неправильный номер телефона/пароль")
+                                alertBuilder.setMessage(getString(R.string.invalid_phone_or_password))
                                 alertBuilder.show()
                             }
                         }

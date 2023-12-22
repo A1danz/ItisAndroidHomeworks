@@ -191,9 +191,9 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
             }
             btnDeleteProfile.setOnClickListener {
                 val alertDialog = AlertDialog.Builder(requireContext())
-                alertDialog.setMessage("Вы уверены, что хотите удалить профиль?")
-                alertDialog.setPositiveButton("Да") { dialog, which -> deleteProfile(userId, userService) }
-                alertDialog.setNegativeButton("Нет") { dialog, which -> }
+                alertDialog.setMessage(getString(R.string.are_you_sure_want_delete_proifle))
+                alertDialog.setPositiveButton(getString(R.string.yes)) { dialog, which -> deleteProfile(userId, userService) }
+                alertDialog.setNegativeButton(getString(R.string.no)) { dialog, which -> }
                 alertDialog.show()
             }
 
@@ -231,7 +231,6 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                         getString(R.string.fill_field)
                 }
             }
-            println("TEST TAG change - $passwordChanged")
             if (newPhone == null && !passwordChanged) return
             lifecycleScope.launch(Dispatchers.IO) {
                 val result : StringBuilder = StringBuilder()
@@ -248,7 +247,6 @@ class ProfileFragment : BaseFragment(R.layout.profile_fragment) {
                 }
                 if (phoneChangeResultDeferred != null) {
                     val phoneChangeResult = phoneChangeResultDeferred.await()
-                    println("TEST TAG - $phoneChangeResult")
                     if (phoneChangeResult.isSuccess) {
                         phoneChangeResult.getOrNull()!!.let { msg ->
                             if (msg == UXMessages.SUCCESS_CHANGE_PHONE) {

@@ -48,4 +48,12 @@
     <string name="user_rating_title">Ваша оценка:</string>
     <string name="vote">Проголосовать</string>
     <string name="failure_vote">Не получилось поставить оценку песне</string>
+    <string name="invalid_time">Вы ввели время в неправильном формате. Правильный: мм:сс</string>
+    <string name="song_successful_added">Песня успешно добавлена!</string>
+    <string name="song_not_added">Песня не добавлена.</string>
+    <string name="error_during_adding_song">Произошла непредвиденная ошибка при добавлении музыка</string>
+    <string name="are_you_sure_want_delete_proifle">Вы уверены, что хотите удалить профиль?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="invalid_phone_or_password">Вы ввели неправильный номер телефона/пароль</string>
 </resources>

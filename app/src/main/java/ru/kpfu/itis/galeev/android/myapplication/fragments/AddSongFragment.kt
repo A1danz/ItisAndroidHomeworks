@@ -14,6 +14,7 @@ import ru.kpfu.itis.galeev.android.myapplication.base.BaseFragment
 import ru.kpfu.itis.galeev.android.myapplication.data.db.entity.SongEntity
 import ru.kpfu.itis.galeev.android.myapplication.databinding.AddSongFragmentBinding
 import ru.kpfu.itis.galeev.android.myapplication.di.ServiceLocator
+import ru.kpfu.itis.galeev.android.myapplication.utils.RegexPatterns
 
 class AddSongFragment : BaseFragment(R.layout.add_song_fragment) {
     var _viewBinding : AddSongFragmentBinding? = null
@@ -38,7 +39,27 @@ class AddSongFragment : BaseFragment(R.layout.add_song_fragment) {
         val alertBuilder = AlertDialog.Builder(requireContext())
         with(viewBinding) {
             btnAddSong.setOnClickListener {
-                // check for validation
+                if (etSongTitle.text.isEmpty()) {
+                    etSongTitle.error = getString(R.string.fill_field)
+                    return@setOnClickListener
+                }
+                if (etSongAuthor.text.isEmpty()) {
+                    etSongAuthor.error = getString(R.string.fill_field)
+                    return@setOnClickListener
+                }
+                if (etSongDuration.text.isEmpty()) {
+                    etSongDuration.error = getString(R.string.fill_field)
+                    return@setOnClickListener
+                }
+                if (!etSongDuration.text.toString().matches(RegexPatterns.DURATION_REGEX)) {
+                    etSongDuration.error = getString(R.string.invalid_time)
+                    return@setOnClickListener
+                }
+                if (etSongText.text.isEmpty()) {
+                    etSongText.error = getString(R.string.fill_field)
+                    return@setOnClickListener
+                }
+
                 val title : String = etSongTitle.text.toString()
                 val author : String = etSongAuthor.text.toString()
                 val duration : String = etSongDuration.text.toString()
@@ -59,13 +80,13 @@ class AddSongFragment : BaseFragment(R.layout.add_song_fragment) {
                     }
                     if (addResult.isSuccess) {
                         if (addResult.getOrDefault(0) > 0) {
-                            addingResultText = "Песня успешно добавлена!"
+                            addingResultText = getString(R.string.song_successful_added)
                         } else {
-                            addingResultText = "Песня не добавлена."
+                            addingResultText = getString(R.string.song_not_added)
                         }
                     } else {
                         println("TEST TAG - exc: ${addResult.exceptionOrNull()}")
-                        addingResultText = "Произошла непредвиденная ошибка при добавлении музыка"
+                        addingResultText = getString(R.string.error_during_adding_song)
                     }
                     withContext(Dispatchers.Main) {
                         alertBuilder.setMessage(addingResultText)

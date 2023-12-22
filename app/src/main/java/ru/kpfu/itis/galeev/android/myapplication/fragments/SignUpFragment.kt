@@ -166,7 +166,6 @@ class SignUpFragment : AuthFragment(R.layout.sign_up_fragment) {
                         withContext(Dispatchers.Main) {
                             if (result == UXMessages.SUCCESS_REGISTER) {
                                 if (cbRememberMe.isChecked) {
-                                    println("TEST TAG - CB ACTIVATED")
                                     launch(Dispatchers.IO) {
                                         initSession(ServiceLocator.getUserId(), authUtil)
                                     }
