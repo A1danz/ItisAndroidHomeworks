@@ -67,8 +67,7 @@ class SongsListFragment : BaseFragment(R.layout.songs_list_fragment) {
                     rvSongs.adapter = rvSongListAdapter
                     rvFavoriteSongs.adapter = rvFavoriteSongsAdapter
 
-                    layoutSongsNotFound.isVisible = songs.isEmpty()
-                    layoutNoFavoriteSongs.isVisible = favoriteSongs.isEmpty()
+                    updateItemSize()
 
                 }
 
@@ -87,6 +86,8 @@ class SongsListFragment : BaseFragment(R.layout.songs_list_fragment) {
             if (deleteResult.isSuccess) {
                 withContext(Dispatchers.Main) {
                     rvSongListAdapter?.deleteItem(deletedPosition)
+                    rvFavoriteSongsAdapter?.updateItems(songModel, false)
+                    updateItemSize()
                 }
             } else {
                 val alertBuilder = AlertDialog.Builder(requireContext())
@@ -113,10 +114,17 @@ class SongsListFragment : BaseFragment(R.layout.songs_list_fragment) {
             }
             withContext(Dispatchers.Main) {
                 rvSongListAdapter?.changeFavoriteType(position, isFavorite)
+                rvFavoriteSongsAdapter?.updateItems(songModel, isFavorite)
+                updateItemSize()
             }
-
-
         }
+    }
 
+    private fun updateItemSize() {
+        with(viewBinding) {
+            layoutNoFavoriteSongs.isVisible = rvFavoriteSongsAdapter?.getActualSongSize() == 0
+            layoutSongsNotFound.isVisible = rvSongListAdapter?.getActualSize() == 0
+            println("TEST TAG - ${layoutSongsNotFound.isVisible} - visibility")
+        }
     }
 }

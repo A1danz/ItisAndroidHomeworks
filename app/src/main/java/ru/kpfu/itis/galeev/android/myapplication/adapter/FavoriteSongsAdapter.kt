@@ -8,7 +8,7 @@ import ru.kpfu.itis.galeev.android.myapplication.data.db.entity.SongEntity
 import ru.kpfu.itis.galeev.android.myapplication.databinding.FavoriteSongItemBinding
 import ru.kpfu.itis.galeev.android.myapplication.model.SongModel
 
-class FavoriteSongsAdapter(private val songs : List<SongModel> ) : RecyclerView.Adapter<ViewHolder>() {
+class FavoriteSongsAdapter(private val songs : MutableList<SongModel> ) : RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return FavoriteSongHolder(FavoriteSongItemBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -23,6 +23,26 @@ class FavoriteSongsAdapter(private val songs : List<SongModel> ) : RecyclerView.
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         (holder as FavoriteSongHolder).bindItem(songs[position])
+    }
+
+    fun updateItems(songModel : SongModel, isFavorite : Boolean) {
+        songModel.isFavorite = isFavorite
+        if (isFavorite) {
+            songs.add(songModel)
+            notifyItemInserted(songs.size - 1)
+        } else {
+            for ((index, song) in songs.withIndex()) {
+                if (song.id == songModel.id) {
+                    songs.removeAt(index)
+                    notifyItemRemoved(index)
+                    return
+                }
+            }
+        }
+    }
+
+    fun getActualSongSize() : Int {
+        return songs.size
     }
 
     inner class FavoriteSongHolder(private val viewBinding: FavoriteSongItemBinding) : ViewHolder(viewBinding.root) {

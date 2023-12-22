@@ -41,6 +41,10 @@ class SongListAdapter(
         notifyItemChanged(position)
     }
 
+    fun getActualSize() : Int {
+        return songs.size
+    }
+
 
     inner class SongViewHolder(private val viewBinding : SongItemBinding) : ViewHolder(viewBinding.root) {
         fun bindItem(song : SongModel) {
