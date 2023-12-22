@@ -11,7 +11,7 @@ interface SongDao {
     @Insert
     fun saveSong(song : SongEntity)
 
-    @Query("SELECT * FROM song")
+    @Query("SELECT * FROM song ORDER BY duration ASC")
     fun getAll() : List<SongEntity>
 
     @Query("SELECT * FROM song WHERE id=:id")

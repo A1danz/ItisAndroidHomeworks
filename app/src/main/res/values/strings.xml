@@ -43,7 +43,9 @@
     <string name="rate_song">Оценка данной песни:</string>
     <string name="have_not_rate">Голосов нет.</string>
     <string name="songs_not_found">Песен не найдено</string>
-    <string name="favorite_songs_not_found">У вас еще нет избарнных песен</string>
+    <string name="favorite_songs_not_found">У вас еще нет избранных песен</string>
     <string name="failure_delete_song">Не удалось удалить песню из общего списка попробуйте позже.</string>
     <string name="user_rating_title">Ваша оценка:</string>
+    <string name="vote">Проголосовать</string>
+    <string name="failure_vote">Не получилось поставить оценку песне</string>
 </resources>

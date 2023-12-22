@@ -42,7 +42,7 @@ class AddSongFragment : BaseFragment(R.layout.add_song_fragment) {
                 val title : String = etSongTitle.text.toString()
                 val author : String = etSongAuthor.text.toString()
                 val duration : String = etSongDuration.text.toString()
-                val text : String = etSongDuration.text.toString()
+                val text : String = etSongText.text.toString()
                 val durationInSeconds = convertDurationToSeconds(duration)
 
                 lifecycleScope.launch(Dispatchers.IO) {

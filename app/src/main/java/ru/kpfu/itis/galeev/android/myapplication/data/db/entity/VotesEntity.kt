@@ -19,7 +19,8 @@ import androidx.room.PrimaryKey
             parentColumns = arrayOf("id"),
             childColumns = arrayOf("song_id"),
             onDelete = ForeignKey.CASCADE
-        )]
+        )],
+    primaryKeys = ["user_id", "song_id"]
 )
 data class VotesEntity (
     @ColumnInfo(name = "user_id")
