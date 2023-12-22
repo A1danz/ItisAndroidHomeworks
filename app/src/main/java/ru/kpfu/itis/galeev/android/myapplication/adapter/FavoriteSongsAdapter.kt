@@ -8,7 +8,10 @@ import ru.kpfu.itis.galeev.android.myapplication.data.db.entity.SongEntity
 import ru.kpfu.itis.galeev.android.myapplication.databinding.FavoriteSongItemBinding
 import ru.kpfu.itis.galeev.android.myapplication.model.SongModel
 
-class FavoriteSongsAdapter(private val songs : MutableList<SongModel> ) : RecyclerView.Adapter<ViewHolder>() {
+class FavoriteSongsAdapter(
+    private val songs : MutableList<SongModel>,
+    private val onItemClicked : (SongModel) -> Unit
+) : RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return FavoriteSongHolder(FavoriteSongItemBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -50,6 +53,12 @@ class FavoriteSongsAdapter(private val songs : MutableList<SongModel> ) : Recycl
             with(viewBinding) {
                 tvSongAuthor.text = song.author
                 tvSongTitle.text = song.title
+            }
+        }
+
+        init {
+            viewBinding.cvItem.setOnClickListener {
+                onItemClicked.invoke(songs[adapterPosition])
             }
         }
     }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,6 +22,7 @@ import ru.kpfu.itis.galeev.android.myapplication.data.db.entity.FavoriteSongsEnt
 import ru.kpfu.itis.galeev.android.myapplication.databinding.SongsListFragmentBinding
 import ru.kpfu.itis.galeev.android.myapplication.di.ServiceLocator
 import ru.kpfu.itis.galeev.android.myapplication.model.SongModel
+import ru.kpfu.itis.galeev.android.myapplication.utils.ParamsKey
 
 class SongsListFragment : BaseFragment(R.layout.songs_list_fragment) {
     var _viewBinding : SongsListFragmentBinding? = null
@@ -78,8 +80,12 @@ class SongsListFragment : BaseFragment(R.layout.songs_list_fragment) {
                     println("TEST TAG songs uploading exc - ${songsFromDb.exceptionOrNull()}")
                 }
                 withContext(Dispatchers.Main) {
-                    rvSongListAdapter = SongListAdapter(songs, ::onDeleteSongCallback, ::onFavoriteClickedCallback)
-                    rvFavoriteSongsAdapter = FavoriteSongsAdapter(favoriteSongs)
+                    rvSongListAdapter = SongListAdapter(songs,
+                        ::onDeleteSongCallback,
+                        ::onFavoriteClickedCallback,
+                        ::onItemClicked
+                    )
+                    rvFavoriteSongsAdapter = FavoriteSongsAdapter(favoriteSongs, ::onItemClicked)
 
                     rvSongs.adapter = rvSongListAdapter
                     rvFavoriteSongs.adapter = rvFavoriteSongsAdapter
@@ -137,11 +143,24 @@ class SongsListFragment : BaseFragment(R.layout.songs_list_fragment) {
         }
     }
 
+    fun onItemClicked(songModel: SongModel) {
+        findNavController().navigate(R.id.action_songsListFragment_to_songInfoFragment, Bundle().apply {
+            putInt(ParamsKey.SONG_ID, songModel.id)
+        })
+    }
+
     private fun updateItemSize() {
         with(viewBinding) {
             layoutNoFavoriteSongs.isVisible = rvFavoriteSongsAdapter?.getActualSongSize() == 0
             layoutSongsNotFound.isVisible = rvSongListAdapter?.getActualSize() == 0
             println("TEST TAG - ${layoutSongsNotFound.isVisible} - visibility")
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _viewBinding = null
+        rvSongListAdapter = null
+        rvFavoriteSongsAdapter = null
     }
 }

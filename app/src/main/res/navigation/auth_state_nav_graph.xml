@@ -14,5 +14,13 @@
     <fragment
         android:id="@+id/songsListFragment"
         android:name="ru.kpfu.itis.galeev.android.myapplication.fragments.SongsListFragment"
-        android:label="SongsListFragment" />
+        android:label="SongsListFragment" >
+        <action
+            android:id="@+id/action_songsListFragment_to_songInfoFragment"
+            app:destination="@id/songInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/songInfoFragment"
+        android:name="ru.kpfu.itis.galeev.android.myapplication.fragments.SongInfoFragment"
+        android:label="SongInfoFragment" />
 </navigation>

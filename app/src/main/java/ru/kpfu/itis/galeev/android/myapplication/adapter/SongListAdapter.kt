@@ -13,7 +13,8 @@ import kotlin.reflect.KFunction2
 class SongListAdapter(
     private val songs: MutableList<SongModel>,
     private val onDelete : (SongModel, Int) -> Unit,
-    private val onFavoriteClicked : (SongModel, Int) -> Unit
+    private val onFavoriteClicked : (SongModel, Int) -> Unit,
+    private val onItemClicked : (SongModel) -> Unit
 ) : RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return SongViewHolder(SongItemBinding.inflate(
@@ -66,7 +67,9 @@ class SongListAdapter(
                 btnAddFavorite.setOnClickListener {
                     onFavoriteClicked.invoke(songs[adapterPosition], adapterPosition)
                 }
-
+                clItem.setOnClickListener {
+                    onItemClicked.invoke(songs[adapterPosition])
+                }
             }
         }
     }
