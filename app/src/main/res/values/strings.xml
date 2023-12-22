@@ -35,4 +35,13 @@
     <string name="exit">Выйти</string>
     <string name="error_while_change_phone">Произошла непредвиденная ошибка при изменении телефона</string>
     <string name="error_while_change_password">Произошла непредвиденная ошибка во время смены пароля</string>
+    <string name="text">Текст</string>
+    <string name="duration">Длительность(nn:nn)</string>
+    <string name="author">Автор</string>
+    <string name="song_title">Название песни</string>
+    <string name="song">песня</string>
+    <string name="rate_song">Оцените песню</string>
+    <string name="songs_not_found">Песен не найдено</string>
+    <string name="favorite_songs_not_found">У вас еще нет избарнных песен</string>
+    <string name="failure_delete_song">Не удалось удалить песню из общего списка попробуйте позже.</string>
 </resources>

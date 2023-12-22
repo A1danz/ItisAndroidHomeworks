@@ -1,6 +1,7 @@
 package ru.kpfu.itis.galeev.android.myapplication.data.db.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import ru.kpfu.itis.galeev.android.myapplication.data.db.entity.SongEntity
@@ -14,5 +15,11 @@ interface SongDao {
     fun getAll() : List<SongEntity>
 
     @Query("SELECT * FROM song WHERE id=:id")
-    fun getSongById(id : Int) : List<SongEntity>
+    fun getSongById(id : Int) : SongEntity
+
+    @Insert
+    fun addSong(song: SongEntity) : Long
+
+    @Delete
+    fun deleteSong(song : SongEntity)
 }

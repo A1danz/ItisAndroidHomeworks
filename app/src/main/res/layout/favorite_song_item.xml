@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:padding="5dp"
+    android:layout_marginEnd="5dp"
+    >
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/iv_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/song"
+            android:src="@drawable/song_image"
+            android:text="удалить"
+            android:textSize="12sp"
+            android:alpha="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/iv_song"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:contentDescription="@string/song"
+            android:paddingVertical="6dp"
+            android:src="@drawable/song_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_song_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Акид"
+            android:fontFamily="@font/rubik"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            />
+        <TextView
+            android:id="@+id/tv_song_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Mnogoznal"
+            android:fontFamily="@font/rubik"
+            android:textStyle="bold"
+            android:textColor="@color/text_gray"
+            android:layout_marginBottom="5dp"
+            />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>

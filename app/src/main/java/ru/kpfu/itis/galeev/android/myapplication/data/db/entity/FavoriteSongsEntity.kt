@@ -5,7 +5,8 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 
 @Entity(
-    tableName = "favorite_songs", foreignKeys = [
+    tableName = "favorite_songs",
+    foreignKeys = [
         ForeignKey(
             UserEntity::class,
             parentColumns = ["id"],
@@ -17,7 +18,8 @@ import androidx.room.ForeignKey
             childColumns = ["song_id"],
             ForeignKey.CASCADE
         )
-    ]
+    ],
+    primaryKeys = ["user_id", "song_id"]
 )
 data class FavoriteSongsEntity(
     @ColumnInfo(name = "user_id")

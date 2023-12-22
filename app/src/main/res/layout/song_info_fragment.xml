@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white_bg"
+    android:padding="2dp"
+    >
+
+    <ImageView
+        android:id="@+id/iv_song"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:contentDescription="@string/song"
+        android:src="@drawable/song_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="3dp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_song_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:background="@drawable/sh_secondary_block"
+        app:layout_constraintTop_toBottomOf="@id/iv_song"
+        android:layout_marginTop="5dp"
+        >
+        <TextView
+            android:id="@+id/tv_song_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Акид"
+            android:fontFamily="@font/rubik"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:id="@+id/tv_song_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_song_title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="12dp"
+            android:text="Mnogoznal"
+            android:fontFamily="@font/rubik"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_song_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/rubik"
+            android:text="3:07"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintVertical_bias="0.648" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <SeekBar
+        android:id="@+id/seekbar_rate"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:max="10"
+        app:layout_constraintTop_toBottomOf="@id/layout_song_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="5dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/rate_song"
+        android:fontFamily="@font/rubik"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/seekbar_rate"
+
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
