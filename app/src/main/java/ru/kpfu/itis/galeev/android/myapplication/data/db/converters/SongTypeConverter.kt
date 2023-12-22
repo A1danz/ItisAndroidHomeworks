@@ -6,14 +6,14 @@ import ru.kpfu.itis.galeev.android.myapplication.model.SongModel
 
 class SongTypeConverter {
     @TypeConverter
-    fun fromSongEntityToSongModel(songEntity: SongEntity) : SongModel {
+    fun fromSongEntityToSongModel(songEntity: SongEntity, isFavorite : Boolean = false) : SongModel {
         return SongModel(
             songEntity.id!!,
             songEntity.title,
             songEntity.author,
             songEntity.duration,
             songEntity.text,
-            false
+            isFavorite
         )
     }
 

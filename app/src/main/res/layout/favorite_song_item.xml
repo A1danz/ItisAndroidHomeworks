@@ -11,17 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/iv_delete"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:contentDescription="@string/song"
-            android:src="@drawable/song_image"
-            android:text="удалить"
-            android:textSize="12sp"
-            android:alpha="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
         <ImageView
             android:id="@+id/iv_song"
             android:layout_width="100dp"

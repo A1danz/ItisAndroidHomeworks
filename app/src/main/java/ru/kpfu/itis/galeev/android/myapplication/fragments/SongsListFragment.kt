@@ -45,17 +45,34 @@ class SongsListFragment : BaseFragment(R.layout.songs_list_fragment) {
 
     private fun initViews() {
         val songDao : SongDao = ServiceLocator.getDbInstance(requireContext()).songDao
+        val favoriteSongsDao : FavoriteSongsDao = ServiceLocator.getDbInstance(requireContext()).favoriteSongsDao
         val songTypeConverter = SongTypeConverter()
+        val userId : Int = ServiceLocator.getUserId()
         with(viewBinding) {
             lifecycleScope.launch(Dispatchers.IO) {
                 val songs : MutableList<SongModel> = mutableListOf()
                 val favoriteSongs : MutableList<SongModel> = mutableListOf()
+                val favoriteSongsFromDb = kotlin.runCatching {
+                    favoriteSongsDao.getUserSongs(userId)
+                }
+                if (favoriteSongsFromDb.isSuccess) {
+                    favoriteSongs.addAll(favoriteSongsFromDb.getOrDefault(mutableListOf()).map { songEntity ->
+                        songTypeConverter.fromSongEntityToSongModel(songEntity, true)
+                    })
+                } else {
+                    println("TEST TAG songs uploading exc - ${favoriteSongsFromDb.exceptionOrNull()}")
+                }
+
                 val songsFromDb = kotlin.runCatching {
                     songDao.getAll()
                 }
                 if (songsFromDb.isSuccess) {
+                    val favoriteSongEntities = favoriteSongsFromDb.getOrDefault(mutableListOf())
                     songs.addAll(songsFromDb.getOrDefault(mutableListOf()).map { songEntity ->
-                        songTypeConverter.fromSongEntityToSongModel(songEntity)
+                        songTypeConverter.fromSongEntityToSongModel(
+                            songEntity,
+                            favoriteSongEntities.contains(songEntity)
+                        )
                     })
                 } else {
                     println("TEST TAG songs uploading exc - ${songsFromDb.exceptionOrNull()}")
