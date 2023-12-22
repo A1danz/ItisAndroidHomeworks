@@ -34,7 +34,7 @@ class SignInFragment : AuthFragment(R.layout.sign_in_fragment) {
         val userId : Int? = getUserIdFromSession(AuthorizationUtil(ServiceLocator.getDbInstance(requireContext()).userDao))
         if (userId != null) {
             ServiceLocator.authorizeUser(userId)
-            findNavController().navigate(R.id.action_signInFragment_to_songsListFragment)
+            findNavController().navigate(R.id.action_signInFragment_to_authorizedStateFragment)
         }
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -69,7 +69,7 @@ class SignInFragment : AuthFragment(R.layout.sign_in_fragment) {
                                         initSession(ServiceLocator.getUserId(), authUtil)
                                     }
                                 }
-                                findNavController().navigate(R.id.action_signInFragment_to_songsListFragment)
+                                findNavController().navigate(R.id.action_signInFragment_to_authorizedStateFragment)
                             } else {
                                 alertBuilder.setMessage("Вы ввели неправильный номер телефона/пароль")
                                 alertBuilder.show()

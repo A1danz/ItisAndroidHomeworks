@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/auth_state_nav_graph"
+    app:startDestination="@id/songsListFragment">
+    <fragment
+        android:id="@+id/addSongFragment"
+        android:name="ru.kpfu.itis.galeev.android.myapplication.fragments.AddSongFragment"
+        android:label="AddSongFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ru.kpfu.itis.galeev.android.myapplication.fragments.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/songsListFragment"
+        android:name="ru.kpfu.itis.galeev.android.myapplication.fragments.SongsListFragment"
+        android:label="SongsListFragment" />
+</navigation>

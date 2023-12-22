@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,6 +28,13 @@ class SignUpFragment : AuthFragment(R.layout.sign_up_fragment) {
     var _viewBinding : SignUpFragmentBinding? = null
     val viewBinding :  SignUpFragmentBinding get() = _viewBinding!!
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val userId : Int? = getUserIdFromSession(AuthorizationUtil(ServiceLocator.getDbInstance(requireContext()).userDao))
+        if (userId != null) {
+            ServiceLocator.authorizeUser(userId)
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -142,8 +150,8 @@ class SignUpFragment : AuthFragment(R.layout.sign_up_fragment) {
                     dataIsValid = false
                 }
                 if (password.isEmpty() || password != repeatPassword) {
-                    editTextPassword.setError("Пароли не совпадают")
-                    editTextRepeatPassword.setError("Пароли не совпадают")
+                    editTextPassword.setError(getString(R.string.passwords_not_equals))
+                    editTextRepeatPassword.setError(getString(R.string.passwords_not_equals))
                     dataIsValid = false
                 }
                 if (dataIsValid) {
@@ -163,7 +171,7 @@ class SignUpFragment : AuthFragment(R.layout.sign_up_fragment) {
                                         initSession(ServiceLocator.getUserId(), authUtil)
                                     }
                                 }
-                                findNavController().navigate(R.id.action_signUpFragment_to_songsListFragment)
+                                findNavController().navigate(R.id.action_signUpFragment_to_authorizedStateFragment)
                             } else {
                                 alertBuilder.setMessage(getString(R.string.user_already_exists_msg))
                                 val alert = alertBuilder.create()
