@@ -2,4 +2,16 @@
     <string name="app_name">My Application</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="type_your_text">Введите текст</string>
+    <string name="temperature_celsius">%1$s ℃</string>
+    <string name="feels_like">Ощущается как: </string>
+    <string name="pressure">Давление: </string>
+    <string name="pressure_value">1009 ГПа</string>
+    <string name="humidity">Влажность: </string>
+    <string name="humidity_value">96 %</string>
+    <string name="wind_speed_value">3 м/c</string>
+    <string name="wind_speed">Скорость ветра: </string>
+    <string name="wind_deg">Направление ветра: </string>
+    <string name="wind_gust">Порыв ветра: </string>
+    <string name="get">Получить</string>
+    <string name="city">Город</string>
 </resources>

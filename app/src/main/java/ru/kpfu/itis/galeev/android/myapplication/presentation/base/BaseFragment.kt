@@ -7,15 +7,20 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment(@LayoutRes layout : Int) : Fragment() {
+abstract class BaseFragment(@LayoutRes layoutRes : Int) : Fragment(layoutRes) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        showMessageInConsole("OnCreateCalled")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//        showMessageInConsole("OnCreateViewCalled")
+        showMessageInConsole("OnCreateViewCalled")
         return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        showMessageInConsole("OnViewCreatedCalled")
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onStart() {
