@@ -1,4 +1,4 @@
-package ru.kpfu.itis.galeev.android.myapplication.base
+package ru.kpfu.itis.galeev.android.myapplication.presentation.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

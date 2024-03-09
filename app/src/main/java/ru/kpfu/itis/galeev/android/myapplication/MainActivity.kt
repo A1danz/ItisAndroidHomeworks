@@ -1,7 +1,7 @@
 package ru.kpfu.itis.galeev.android.myapplication
 
 import android.os.Bundle
-import ru.kpfu.itis.galeev.android.myapplication.base.BaseActivity
+import ru.kpfu.itis.galeev.android.myapplication.presentation.base.BaseActivity
 import ru.kpfu.itis.galeev.android.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : BaseActivity() {
