@@ -79,6 +79,9 @@ dependencies {
 
     val loggingVersion = "4.12.0"
     implementation("com.squareup.okhttp3:logging-interceptor:$loggingVersion")
+
+    val vmLifecycleVersion = "2.4.0"
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$vmLifecycleVersion")
     
 
     // Test section
