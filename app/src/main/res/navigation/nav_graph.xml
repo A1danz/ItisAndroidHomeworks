@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/weatherFragment"
         android:name="ru.kpfu.itis.galeev.android.myapplication.presentation.screens.weather.WeatherFragment"
-        android:label="WeatherFragment" />
+        android:label="WeatherFragment" >
+        <action
+            android:id="@+id/action_weatherFragment_to_debugMenuFragment"
+            app:destination="@id/debugMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/debugMenuFragment"
+        android:name="ru.kpfu.itis.galeev.android.myapplication.presentation.screens.debugmenu.DebugMenuFragment"
+        android:label="DebugMenuFragment" >
+        <action
+            android:id="@+id/action_debugMenuFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
+    </fragment>
 </navigation>

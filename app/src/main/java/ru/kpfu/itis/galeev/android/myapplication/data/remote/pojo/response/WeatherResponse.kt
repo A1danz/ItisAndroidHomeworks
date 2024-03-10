@@ -8,7 +8,10 @@ class WeatherResponse(
     @SerializedName("main")
     val mainData : MainData? = null,
     val wind : Wind? = null,
-    val about : Array<AboutWeather>? = null
+    @SerializedName("weather")
+    val about : Array<AboutWeather>? = null,
+    @SerializedName("name")
+    val cityName : String? = null
 )
 
 class CoordData(

@@ -7,7 +7,8 @@ data class WeatherUiModel(
     val coordData : WeatherCoordUiModel,
     val mainData: WeatherMainUiModel,
     val windData : WeatherWindUiModel,
-    val aboutData : WeatherAboutUiModel
+    val aboutData : WeatherAboutUiModel,
+    val cityName : String
 )
 
 data class WeatherCoordUiModel(

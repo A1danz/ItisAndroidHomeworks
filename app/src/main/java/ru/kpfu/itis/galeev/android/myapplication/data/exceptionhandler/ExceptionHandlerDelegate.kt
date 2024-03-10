@@ -12,7 +12,7 @@ import ru.kpfu.itis.galeev.android.myapplication.data.exceptions.UnauthorizedExc
 class ExceptionHandlerDelegate {
     fun handleException(ex : Throwable) : Throwable {
         if (ex !is HttpException) return ex
-        if (ex.code() in 500..599) return ServerErrorException(ex.code().toString())
+        if (ex.code() in 500..599) return ServerErrorException()
         return when(ex.code()) {
             400 -> BadRequestException()
             401 -> UnauthorizedException()

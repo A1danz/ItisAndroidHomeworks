@@ -20,6 +20,7 @@ android {
         buildConfigField("String", "OPEN_WEATHER_BASE_URL", "\"https://api.openweathermap.org/data/2.5/\"")
         buildConfigField("String", "APP_ID_KEY", "\"716d517d853d68070366019b59c13c12\"")
         buildConfigField("String", "OPEN_WEATHER_ICON_URL", "\"https://openweathermap.org/\"")
+        buildConfigField("String", "DEBUG_SECRET_KEY", "\"debug_bro_pls_open\"")
     }
 
     buildTypes {

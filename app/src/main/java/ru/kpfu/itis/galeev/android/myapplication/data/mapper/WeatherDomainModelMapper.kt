@@ -31,7 +31,8 @@ class WeatherDomainModelMapper {
                     about?.get(0)?.weatherGroup ?: "",
                     about?.get(0)?.description ?: "",
                     about?.get(0)?.icon ?: ""
-                )
+                ),
+                cityName = cityName ?: ""
             )
         }
     }

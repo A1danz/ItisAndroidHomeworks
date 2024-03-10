@@ -8,10 +8,10 @@
     <string name="pressure_value">%1$d ГПа</string>
     <string name="humidity">Влажность:&#160;</string>
     <string name="humidity_value">%1$d </string>
-    <string name="wind_speed_value">%1$f м/c</string>
+    <string name="wind_speed_value">%1$s м/c</string>
     <string name="wind_speed">Скорость ветра:&#160;</string>
     <string name="wind_deg">Направление ветра:&#160;</string>
-    <string name="wind_deg_value">%1$d </string>
+    <string name="wind_deg_value">%1$d °</string>
     <string name="wind_gust">Порыв ветра:&#160;</string>
     <string name="get">Получить</string>
     <string name="city">Город</string>
@@ -24,4 +24,8 @@
     <string name="many_requests_error">Вы отправили слишком много запросов. Пожалуйста, попробуйте позднее</string>
     <string name="unauthorized_error">Вы не авторизовались для того, чтобы получать данные о погоде</string>
     <string name="error_title">Ошибка при получении данных</string>
+
+    <string name="version_name_version_code">%1$s: %2$d</string>
+    <string name="device_info">%1$s: %2$s</string>
+    <string name="android_version">%1$s(API %2$d)</string>
 </resources>

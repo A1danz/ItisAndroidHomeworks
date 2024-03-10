@@ -29,9 +29,10 @@ class WeatherUiModelMapper {
                 ),
                 aboutData = WeatherAboutUiModel(
                     this.aboutData.weatherGroup,
-                    this.aboutData.description,
+                    "${this.aboutData.description[0].uppercase()}${this.aboutData.description.substring(1)}",
                     OpenWeatherIconGetter.getIconLink(this.aboutData.icon)
-                )
+                ),
+                cityName = cityName
             )
         }
     }

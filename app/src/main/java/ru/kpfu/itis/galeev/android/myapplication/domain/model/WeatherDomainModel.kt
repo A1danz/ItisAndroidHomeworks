@@ -6,7 +6,8 @@ data class WeatherDomainModel(
     val coordData : WeatherCoordDomainModel,
     val mainData : WeatherMainDomainModel,
     val windData : WeatherWindDomainModel,
-    val aboutData : WeatherAboutDomainModel
+    val aboutData : WeatherAboutDomainModel,
+    val cityName : String
 )
 
 fun WeatherDomainModel.isTotalEmpty() : Boolean {
@@ -26,5 +27,5 @@ fun WeatherDomainModel.isTotalEmpty() : Boolean {
         description.isEmpty() && icon.isEmpty() && weatherGroup.isEmpty()
     }
 
-    return isMainDataEmpty && isCoordEmpty && isWindEmpty && isAboutEmpty
+    return isMainDataEmpty && isCoordEmpty && isWindEmpty && isAboutEmpty && cityName.isEmpty()
 }
