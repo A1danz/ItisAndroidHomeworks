@@ -11,7 +11,7 @@ class GetWeatherUseCase(
     private val repository: WeatherRepository,
     private val mapper : WeatherUiModelMapper
 ) {
-    suspend fun getWeatherByCity(city : String) : WeatherUiModel {
+    suspend fun invoke(city : String) : WeatherUiModel {
         return withContext(dispatcher) {
             mapper.mapDomainToUi(
                 repository.getWeatherByCity(city)

@@ -5,6 +5,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.kpfu.itis.galeev.android.myapplication.BuildConfig
+import ru.kpfu.itis.galeev.android.myapplication.data.exceptionhandler.ExceptionHandlerDelegate
 import ru.kpfu.itis.galeev.android.myapplication.data.mapper.WeatherDomainModelMapper
 import ru.kpfu.itis.galeev.android.myapplication.data.remote.OpenWeatherApi
 import ru.kpfu.itis.galeev.android.myapplication.data.remote.interceptors.AppIdInterceptor
@@ -12,6 +13,7 @@ import ru.kpfu.itis.galeev.android.myapplication.data.repository.OpenWeatherRepo
 import ru.kpfu.itis.galeev.android.myapplication.domain.mapper.WeatherUiModelMapper
 import ru.kpfu.itis.galeev.android.myapplication.domain.repository.WeatherRepository
 import ru.kpfu.itis.galeev.android.myapplication.domain.usecase.GetWeatherUseCase
+import java.lang.Exception
 
 object ServiceLocator {
     private lateinit var okHttpClient : OkHttpClient
@@ -20,8 +22,10 @@ object ServiceLocator {
     lateinit var getWeatherUseCase: GetWeatherUseCase
         private set
 
+    val exceptionHandlerDelegate = ExceptionHandlerDelegate()
     private val weatherDomainModelMapper = WeatherDomainModelMapper()
     private val weatherUiModelMapper = WeatherUiModelMapper()
+
 
     fun initDataDependencies() {
         okHttpClient = createHttpClient()
